@@ -1,21 +1,17 @@
 package cmltest
 
 func (*ModelRole) TableName() string {
-	return "cmltest_role"
+	return "quan_role"
 }
 
 func (*ModelUserRole) TableName() string {
-	return "cmltest_user_role"
-}
-
-func (*ModelPermission) TableName() string {
-	return "cmltest_permission"
-}
-
-func (*ModelMenu) TableName() string {
-	return "cmltest_menu"
+	return "quan_user_role"
 }
 
 func (*ModelRoleResource) TableName() string {
-	return "cmltest_role_resource"
+	return "quan_role_resource"
+}
+
+func (*ModelPermission) TableName() string {
+	return "quan_permission"
 }
