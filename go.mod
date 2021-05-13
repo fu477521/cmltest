@@ -23,4 +23,5 @@ require (
 	golang.org/x/sys v0.0.0-20210511113859-b0526f3d8744 // indirect
 	google.golang.org/genproto v0.0.0-20210510173355-fb37daa5cd7a // indirect
 	google.golang.org/protobuf v1.26.0
+	qiniupkg.com/x v7.0.8+incompatible
 )

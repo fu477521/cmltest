@@ -70,3 +70,8 @@ func DelPermission(ctx *rpc.Context, req *DelPermissionReq) (*DelPermissionRsp, 
 	rsp := &DelPermissionRsp{}
 	return rsp, rpc.ClientCall(ctx, ServiceName, DelPermissionCMDPath, req, rsp)
 }
+
+func GetUserRoleListSys(ctx *rpc.Context, req *GetUserRoleListSysReq) (*GetUserRoleListSysRsp, error) {
+	rsp := &GetUserRoleListSysRsp{}
+	return rsp, rpc.ClientCall(ctx, ServiceName, GetUserRoleListSysCMDPath, req, rsp)
+}

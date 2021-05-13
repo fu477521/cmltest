@@ -15,19 +15,6 @@ var ModelRolePermission = &dbproxy.ModelObjectType{
 	FieldList: &dbproxy.ObjectFieldList{
 		List: []*dbproxy.ObjectField{
 			{
-				FieldName: "app_type_list",
-				Type:      "uint32",
-				RefType:   "quan.AppType",
-				FormName:  "",
-				FormType:  "",
-				Validate:  "",
-				DbDef:     "",
-				ScopeCond: "",
-				LinkTo:    "",
-				Editable:  true,
-				IsArray:   true,
-			},
-			{
 				FieldName: "permission_map",
 				Type:      "object",
 				RefType:   "",
@@ -48,18 +35,12 @@ func init() {
 	ObjectTypeList = append(ObjectTypeList, ModelRolePermission)
 }
 
-var AppTypeListModelRolePermission = &dbproxy.StructField{
-	StructFieldName: "AppTypeList",
-	DbFieldName:     "app_type_list",
-}
-
 var PermissionMapModelRolePermission = &dbproxy.StructField{
 	StructFieldName: "PermissionMap",
 	DbFieldName:     "permission_map",
 }
 
 type ModelRolePermissionReflect struct {
-	AppTypeList dbproxy.StructFieldWithObj
 	PermissionMap dbproxy.StructFieldWithObj
 }
 
@@ -69,7 +50,6 @@ func NewModelRolePermissionReflect(i interface{}) *ModelRolePermissionReflect {
 	    obj = obj.Elem()
 	}
 	r := &ModelRolePermissionReflect{
-		AppTypeList: dbproxy.StructFieldWithObj{Field: AppTypeListModelRolePermission, Obj: obj},
 		PermissionMap: dbproxy.StructFieldWithObj{Field: PermissionMapModelRolePermission, Obj: obj},
 	}
 

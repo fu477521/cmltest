@@ -3,35 +3,31 @@ package cmltest
 
 const (
 	SvrName = "cmltest"
+	AddPermissionCMDPath = "/cmltest/AddPermission"
+	SetPermissionCMDPath = "/cmltest/SetPermission"
+	GetPermissionListCMDPath = "/cmltest/GetPermissionList"
+	DelPermissionCMDPath = "/cmltest/DelPermission"
 	AddRoleCMDPath = "/cmltest/AddRole"
 	UpdateRoleCMDPath = "/cmltest/UpdateRole"
 	DelRoleCMDPath = "/cmltest/DelRole"
 	CopyRoleCMDPath = "/cmltest/CopyRole"
 	SortRoleCMDPath = "/cmltest/SortRole"
 	GetRoleListCMDPath = "/cmltest/GetRoleList"
-	SetRoleStaffCMDPath = "/cmltest/SetRoleStaff"
-	GetDefaultRoleListCMDPath = "/cmltest/GetDefaultRoleList"
-	GetPermissionCMDPath = "/cmltest/GetPermission"
-	AddPermissionCMDPath = "/cmltest/AddPermission"
-	SetPermissionCMDPath = "/cmltest/SetPermission"
-	GetPermissionListCMDPath = "/cmltest/GetPermissionList"
-	DelPermissionCMDPath = "/cmltest/DelPermission"
+	GetUserRoleListSysCMDPath = "/cmltest/GetUserRoleListSys"
 )
 
 var Path2CmdID = map[string]int{
+	AddPermissionCMDPath: 0,
+	SetPermissionCMDPath: 0,
+	GetPermissionListCMDPath: 0,
+	DelPermissionCMDPath: 0,
 	AddRoleCMDPath: 0,
 	UpdateRoleCMDPath: 0,
 	DelRoleCMDPath: 0,
 	CopyRoleCMDPath: 0,
 	SortRoleCMDPath: 0,
 	GetRoleListCMDPath: 0,
-	SetRoleStaffCMDPath: 0,
-	GetDefaultRoleListCMDPath: 0,
-	GetPermissionCMDPath: 0,
-	AddPermissionCMDPath: 0,
-	SetPermissionCMDPath: 0,
-	GetPermissionListCMDPath: 0,
-	DelPermissionCMDPath: 0,
+	GetUserRoleListSysCMDPath: 0,
 }
 
 var CmdID2Path = map[int]string{
@@ -39,18 +35,16 @@ var CmdID2Path = map[int]string{
 }
 
 var Path2UserType = map[string]string{
+	AddPermissionCMDPath: "staff",
+	SetPermissionCMDPath: "staff",
+	GetPermissionListCMDPath: "",
+	DelPermissionCMDPath: "staff",
 	AddRoleCMDPath: "",
 	UpdateRoleCMDPath: "",
 	DelRoleCMDPath: "",
 	CopyRoleCMDPath: "",
 	SortRoleCMDPath: "",
 	GetRoleListCMDPath: "",
-	SetRoleStaffCMDPath: "staff",
-	GetDefaultRoleListCMDPath: "",
-	GetPermissionCMDPath: "",
-	AddPermissionCMDPath: "staff",
-	SetPermissionCMDPath: "staff",
-	GetPermissionListCMDPath: "",
-	DelPermissionCMDPath: "staff",
+	GetUserRoleListSysCMDPath: "",
 }
 

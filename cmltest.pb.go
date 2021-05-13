@@ -13,7 +13,6 @@ import (
 	reflect "reflect"
 	_ "git.pinquest.cn/qlb/brick/ext"
 	core "git.pinquest.cn/qlb/core"
-	quan "git.pinquest.cn/qlb/quan"
 	sync "sync"
 )
 
@@ -24,130 +23,203 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type GetRoleListReq_ListOption int32
+type ErrCode int32
 
 const (
-	GetRoleListReq_ListOptionNil GetRoleListReq_ListOption = 0
-	// @type: string
-	GetRoleListReq_ListOptionName GetRoleListReq_ListOption = 1
-	// @desc: 把创建者取出来
-	// @type: none
-	GetRoleListReq_ListOptionIncludeCreator GetRoleListReq_ListOption = 2
+	ErrCode_Success                 ErrCode = 0
+	ErrCode_ErrPermissionNotFound   ErrCode = 347001
+	ErrCode_ErrRoleNotFound         ErrCode = 347002
+	ErrCode_ErrUserRoleNotFound     ErrCode = 347003
+	ErrCode_ErrRoleResourceNotFound ErrCode = 347004
 )
 
-// Enum value maps for GetRoleListReq_ListOption.
+// Enum value maps for ErrCode.
 var (
-	GetRoleListReq_ListOption_name = map[int32]string{
-		0: "ListOptionNil",
-		1: "ListOptionName",
-		2: "ListOptionIncludeCreator",
+	ErrCode_name = map[int32]string{
+		0:      "Success",
+		347001: "ErrPermissionNotFound",
+		347002: "ErrRoleNotFound",
+		347003: "ErrUserRoleNotFound",
+		347004: "ErrRoleResourceNotFound",
 	}
-	GetRoleListReq_ListOption_value = map[string]int32{
-		"ListOptionNil":            0,
-		"ListOptionName":           1,
-		"ListOptionIncludeCreator": 2,
+	ErrCode_value = map[string]int32{
+		"Success":                 0,
+		"ErrPermissionNotFound":   347001,
+		"ErrRoleNotFound":         347002,
+		"ErrUserRoleNotFound":     347003,
+		"ErrRoleResourceNotFound": 347004,
 	}
 )
 
-func (x GetRoleListReq_ListOption) Enum() *GetRoleListReq_ListOption {
-	p := new(GetRoleListReq_ListOption)
+func (x ErrCode) Enum() *ErrCode {
+	p := new(ErrCode)
 	*p = x
 	return p
 }
 
-func (x GetRoleListReq_ListOption) String() string {
+func (x ErrCode) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (GetRoleListReq_ListOption) Descriptor() protoreflect.EnumDescriptor {
+func (ErrCode) Descriptor() protoreflect.EnumDescriptor {
 	return file_cmltest_proto_enumTypes[0].Descriptor()
 }
 
-func (GetRoleListReq_ListOption) Type() protoreflect.EnumType {
+func (ErrCode) Type() protoreflect.EnumType {
 	return &file_cmltest_proto_enumTypes[0]
 }
 
-func (x GetRoleListReq_ListOption) Number() protoreflect.EnumNumber {
+func (x ErrCode) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use GetRoleListReq_ListOption.Descriptor instead.
-func (GetRoleListReq_ListOption) EnumDescriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{10, 0}
+// Deprecated: Use ErrCode.Descriptor instead.
+func (ErrCode) EnumDescriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{0}
 }
 
-type GetPermissionListReq_ListOption int32
+type AppType int32
 
 const (
-	GetPermissionListReq_ListOptionNil GetPermissionListReq_ListOption = 0
-	// @type: uint32
-	GetPermissionListReq_ListOptionServiceType GetPermissionListReq_ListOption = 1
+	AppType_AppNil         AppType = 0  // 默认
+	AppType_AppBiLin       AppType = 1  // 比邻
+	AppType_AppQRobot      AppType = 2  // 圈客宝
+	AppType_AppQOrder      AppType = 3  // 云订单
+	AppType_AppQWhale      AppType = 4  // 鲸量
+	AppType_AppQTk         AppType = 5  // 超级拓客
+	AppType_AppQAICaller   AppType = 6  // ai电话
+	AppType_AppRedPacket   AppType = 7  // 红包
+	AppType_AppGroupCredit AppType = 8  // 群积分
+	AppType_AppJQT         AppType = 9  // 京企通
+	AppType_AppQMsg        AppType = 10 // 客服系统
 )
 
-// Enum value maps for GetPermissionListReq_ListOption.
+// Enum value maps for AppType.
 var (
-	GetPermissionListReq_ListOption_name = map[int32]string{
-		0: "ListOptionNil",
-		1: "ListOptionServiceType",
+	AppType_name = map[int32]string{
+		0:  "AppNil",
+		1:  "AppBiLin",
+		2:  "AppQRobot",
+		3:  "AppQOrder",
+		4:  "AppQWhale",
+		5:  "AppQTk",
+		6:  "AppQAICaller",
+		7:  "AppRedPacket",
+		8:  "AppGroupCredit",
+		9:  "AppJQT",
+		10: "AppQMsg",
 	}
-	GetPermissionListReq_ListOption_value = map[string]int32{
-		"ListOptionNil":         0,
-		"ListOptionServiceType": 1,
+	AppType_value = map[string]int32{
+		"AppNil":         0,
+		"AppBiLin":       1,
+		"AppQRobot":      2,
+		"AppQOrder":      3,
+		"AppQWhale":      4,
+		"AppQTk":         5,
+		"AppQAICaller":   6,
+		"AppRedPacket":   7,
+		"AppGroupCredit": 8,
+		"AppJQT":         9,
+		"AppQMsg":        10,
 	}
 )
 
-func (x GetPermissionListReq_ListOption) Enum() *GetPermissionListReq_ListOption {
-	p := new(GetPermissionListReq_ListOption)
+func (x AppType) Enum() *AppType {
+	p := new(AppType)
 	*p = x
 	return p
 }
 
-func (x GetPermissionListReq_ListOption) String() string {
+func (x AppType) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (GetPermissionListReq_ListOption) Descriptor() protoreflect.EnumDescriptor {
+func (AppType) Descriptor() protoreflect.EnumDescriptor {
 	return file_cmltest_proto_enumTypes[1].Descriptor()
 }
 
-func (GetPermissionListReq_ListOption) Type() protoreflect.EnumType {
+func (AppType) Type() protoreflect.EnumType {
 	return &file_cmltest_proto_enumTypes[1]
 }
 
-func (x GetPermissionListReq_ListOption) Number() protoreflect.EnumNumber {
+func (x AppType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use GetPermissionListReq_ListOption.Descriptor instead.
-func (GetPermissionListReq_ListOption) EnumDescriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{22, 0}
+// Deprecated: Use AppType.Descriptor instead.
+func (AppType) EnumDescriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{1}
+}
+
+// 资源类型
+type ResourceType int32
+
+const (
+	ResourceType_ResourceTypeNil         ResourceType = 0
+	ResourceType_ResourceTypeQrobot      ResourceType = 1 // 平台号
+	ResourceType_ResourceTypeHostAccount ResourceType = 2 // 扫码号
+)
+
+// Enum value maps for ResourceType.
+var (
+	ResourceType_name = map[int32]string{
+		0: "ResourceTypeNil",
+		1: "ResourceTypeQrobot",
+		2: "ResourceTypeHostAccount",
+	}
+	ResourceType_value = map[string]int32{
+		"ResourceTypeNil":         0,
+		"ResourceTypeQrobot":      1,
+		"ResourceTypeHostAccount": 2,
+	}
+)
+
+func (x ResourceType) Enum() *ResourceType {
+	p := new(ResourceType)
+	*p = x
+	return p
+}
+
+func (x ResourceType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ResourceType) Descriptor() protoreflect.EnumDescriptor {
+	return file_cmltest_proto_enumTypes[2].Descriptor()
+}
+
+func (ResourceType) Type() protoreflect.EnumType {
+	return &file_cmltest_proto_enumTypes[2]
+}
+
+func (x ResourceType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ResourceType.Descriptor instead.
+func (ResourceType) EnumDescriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{2}
 }
 
 type ModelRole_RoleType int32
 
 const (
-	ModelRole_RoleTypeNil     ModelRole_RoleType = 0
-	ModelRole_RoleTypeCreator ModelRole_RoleType = 1 // 超管
-	ModelRole_RoleTypeAdmin   ModelRole_RoleType = 2 // 管理员
-	ModelRole_RoleTypeDefault ModelRole_RoleType = 3 // 默认的普通成员
-	ModelRole_RoleTypeNormal  ModelRole_RoleType = 4 // 用户创建的普通成员
+	ModelRole_RoleTypeNil        ModelRole_RoleType = 0
+	ModelRole_RoleTypeSuperAdmin ModelRole_RoleType = 1 // 超级管理组
+	ModelRole_RoleTypeOperator   ModelRole_RoleType = 2 // 运营组
 )
 
 // Enum value maps for ModelRole_RoleType.
 var (
 	ModelRole_RoleType_name = map[int32]string{
 		0: "RoleTypeNil",
-		1: "RoleTypeCreator",
-		2: "RoleTypeAdmin",
-		3: "RoleTypeDefault",
-		4: "RoleTypeNormal",
+		1: "RoleTypeSuperAdmin",
+		2: "RoleTypeOperator",
 	}
 	ModelRole_RoleType_value = map[string]int32{
-		"RoleTypeNil":     0,
-		"RoleTypeCreator": 1,
-		"RoleTypeAdmin":   2,
-		"RoleTypeDefault": 3,
-		"RoleTypeNormal":  4,
+		"RoleTypeNil":        0,
+		"RoleTypeSuperAdmin": 1,
+		"RoleTypeOperator":   2,
 	}
 )
 
@@ -162,11 +234,11 @@ func (x ModelRole_RoleType) String() string {
 }
 
 func (ModelRole_RoleType) Descriptor() protoreflect.EnumDescriptor {
-	return file_cmltest_proto_enumTypes[2].Descriptor()
+	return file_cmltest_proto_enumTypes[3].Descriptor()
 }
 
 func (ModelRole_RoleType) Type() protoreflect.EnumType {
-	return &file_cmltest_proto_enumTypes[2]
+	return &file_cmltest_proto_enumTypes[3]
 }
 
 func (x ModelRole_RoleType) Number() protoreflect.EnumNumber {
@@ -175,1271 +247,148 @@ func (x ModelRole_RoleType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ModelRole_RoleType.Descriptor instead.
 func (ModelRole_RoleType) EnumDescriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{26, 0}
+	return file_cmltest_proto_rawDescGZIP(), []int{0, 0}
 }
 
-type ModelRole_DataScope_Scope int32
+type GetPermissionListReq_ListOption int32
 
 const (
-	ModelRole_DataScope_ScopeNil  ModelRole_DataScope_Scope = 0
-	ModelRole_DataScope_ScopeAll  ModelRole_DataScope_Scope = 1 // 所有人
-	ModelRole_DataScope_ScopeSelf ModelRole_DataScope_Scope = 2 // 仅自己
-	ModelRole_DataScope_ScopeDept ModelRole_DataScope_Scope = 3 // 指定部门
+	GetPermissionListReq_ListOptionNil GetPermissionListReq_ListOption = 0
+	// @type: uint32
+	GetPermissionListReq_ListOptionAppType GetPermissionListReq_ListOption = 1
 )
 
-// Enum value maps for ModelRole_DataScope_Scope.
+// Enum value maps for GetPermissionListReq_ListOption.
 var (
-	ModelRole_DataScope_Scope_name = map[int32]string{
-		0: "ScopeNil",
-		1: "ScopeAll",
-		2: "ScopeSelf",
-		3: "ScopeDept",
+	GetPermissionListReq_ListOption_name = map[int32]string{
+		0: "ListOptionNil",
+		1: "ListOptionAppType",
 	}
-	ModelRole_DataScope_Scope_value = map[string]int32{
-		"ScopeNil":  0,
-		"ScopeAll":  1,
-		"ScopeSelf": 2,
-		"ScopeDept": 3,
+	GetPermissionListReq_ListOption_value = map[string]int32{
+		"ListOptionNil":     0,
+		"ListOptionAppType": 1,
 	}
 )
 
-func (x ModelRole_DataScope_Scope) Enum() *ModelRole_DataScope_Scope {
-	p := new(ModelRole_DataScope_Scope)
+func (x GetPermissionListReq_ListOption) Enum() *GetPermissionListReq_ListOption {
+	p := new(GetPermissionListReq_ListOption)
 	*p = x
 	return p
 }
 
-func (x ModelRole_DataScope_Scope) String() string {
+func (x GetPermissionListReq_ListOption) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (ModelRole_DataScope_Scope) Descriptor() protoreflect.EnumDescriptor {
-	return file_cmltest_proto_enumTypes[3].Descriptor()
+func (GetPermissionListReq_ListOption) Descriptor() protoreflect.EnumDescriptor {
+	return file_cmltest_proto_enumTypes[4].Descriptor()
 }
 
-func (ModelRole_DataScope_Scope) Type() protoreflect.EnumType {
-	return &file_cmltest_proto_enumTypes[3]
+func (GetPermissionListReq_ListOption) Type() protoreflect.EnumType {
+	return &file_cmltest_proto_enumTypes[4]
 }
 
-func (x ModelRole_DataScope_Scope) Number() protoreflect.EnumNumber {
+func (x GetPermissionListReq_ListOption) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ModelRole_DataScope_Scope.Descriptor instead.
-func (ModelRole_DataScope_Scope) EnumDescriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{26, 1, 0}
+// Deprecated: Use GetPermissionListReq_ListOption.Descriptor instead.
+func (GetPermissionListReq_ListOption) EnumDescriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{8, 0}
 }
 
-type AddRoleReq struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
+type GetRoleListReq_ListOption int32
 
-	// @v: required
-	Role *ModelRole `protobuf:"bytes,1,opt,name=role,proto3" json:"role,omitempty" validate:"required"`
-}
-
-func (x *AddRoleReq) Reset() {
-	*x = AddRoleReq{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[0]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *AddRoleReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AddRoleReq) ProtoMessage() {}
-
-func (x *AddRoleReq) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[0]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AddRoleReq.ProtoReflect.Descriptor instead.
-func (*AddRoleReq) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *AddRoleReq) GetRole() *ModelRole {
-	if x != nil {
-		return x.Role
-	}
-	return nil
-}
-
-type AddRoleRsp struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Role *ModelRole `protobuf:"bytes,1,opt,name=role,proto3" json:"role,omitempty"`
-}
-
-func (x *AddRoleRsp) Reset() {
-	*x = AddRoleRsp{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[1]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *AddRoleRsp) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AddRoleRsp) ProtoMessage() {}
-
-func (x *AddRoleRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[1]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AddRoleRsp.ProtoReflect.Descriptor instead.
-func (*AddRoleRsp) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *AddRoleRsp) GetRole() *ModelRole {
-	if x != nil {
-		return x.Role
-	}
-	return nil
-}
-
-type UpdateRoleReq struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	// @v: required
-	Role *ModelRole `protobuf:"bytes,1,opt,name=role,proto3" json:"role,omitempty" validate:"required"`
-}
-
-func (x *UpdateRoleReq) Reset() {
-	*x = UpdateRoleReq{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[2]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *UpdateRoleReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateRoleReq) ProtoMessage() {}
-
-func (x *UpdateRoleReq) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[2]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateRoleReq.ProtoReflect.Descriptor instead.
-func (*UpdateRoleReq) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *UpdateRoleReq) GetRole() *ModelRole {
-	if x != nil {
-		return x.Role
-	}
-	return nil
-}
-
-type UpdateRoleRsp struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-}
-
-func (x *UpdateRoleRsp) Reset() {
-	*x = UpdateRoleRsp{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[3]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *UpdateRoleRsp) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateRoleRsp) ProtoMessage() {}
-
-func (x *UpdateRoleRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[3]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateRoleRsp.ProtoReflect.Descriptor instead.
-func (*UpdateRoleRsp) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{3}
-}
-
-type DelRoleReq struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	// @v: required
-	Id uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty" validate:"required"`
-}
-
-func (x *DelRoleReq) Reset() {
-	*x = DelRoleReq{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[4]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *DelRoleReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DelRoleReq) ProtoMessage() {}
-
-func (x *DelRoleReq) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[4]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DelRoleReq.ProtoReflect.Descriptor instead.
-func (*DelRoleReq) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *DelRoleReq) GetId() uint64 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-type DelRoleRsp struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-}
-
-func (x *DelRoleRsp) Reset() {
-	*x = DelRoleRsp{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[5]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *DelRoleRsp) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DelRoleRsp) ProtoMessage() {}
-
-func (x *DelRoleRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[5]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DelRoleRsp.ProtoReflect.Descriptor instead.
-func (*DelRoleRsp) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{5}
-}
-
-type CopyRoleReq struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	// @v: required
-	Id uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty" validate:"required"`
-	// @v: max=30
-	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty" validate:"max=30"`
-}
-
-func (x *CopyRoleReq) Reset() {
-	*x = CopyRoleReq{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[6]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *CopyRoleReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CopyRoleReq) ProtoMessage() {}
-
-func (x *CopyRoleReq) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[6]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CopyRoleReq.ProtoReflect.Descriptor instead.
-func (*CopyRoleReq) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *CopyRoleReq) GetId() uint64 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *CopyRoleReq) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-type CopyRoleRsp struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	CopyRole *ModelRole `protobuf:"bytes,1,opt,name=copy_role,json=copyRole,proto3" json:"copy_role,omitempty"`
-}
-
-func (x *CopyRoleRsp) Reset() {
-	*x = CopyRoleRsp{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[7]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *CopyRoleRsp) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CopyRoleRsp) ProtoMessage() {}
-
-func (x *CopyRoleRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[7]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CopyRoleRsp.ProtoReflect.Descriptor instead.
-func (*CopyRoleRsp) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *CopyRoleRsp) GetCopyRole() *ModelRole {
-	if x != nil {
-		return x.CopyRole
-	}
-	return nil
-}
-
-type SortRoleReq struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	RoleList []*ModelRole `protobuf:"bytes,1,rep,name=role_list,json=roleList,proto3" json:"role_list,omitempty"`
-}
-
-func (x *SortRoleReq) Reset() {
-	*x = SortRoleReq{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[8]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *SortRoleReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SortRoleReq) ProtoMessage() {}
-
-func (x *SortRoleReq) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[8]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SortRoleReq.ProtoReflect.Descriptor instead.
-func (*SortRoleReq) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *SortRoleReq) GetRoleList() []*ModelRole {
-	if x != nil {
-		return x.RoleList
-	}
-	return nil
-}
-
-type SortRoleRsp struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-}
-
-func (x *SortRoleRsp) Reset() {
-	*x = SortRoleRsp{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[9]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *SortRoleRsp) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SortRoleRsp) ProtoMessage() {}
-
-func (x *SortRoleRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[9]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SortRoleRsp.ProtoReflect.Descriptor instead.
-func (*SortRoleRsp) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{9}
-}
-
-type GetRoleListReq struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	// @v: required
-	ListOption *core.ListOption `protobuf:"bytes,1,opt,name=list_option,json=listOption,proto3" json:"list_option,omitempty" validate:"required"`
-}
-
-func (x *GetRoleListReq) Reset() {
-	*x = GetRoleListReq{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[10]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *GetRoleListReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetRoleListReq) ProtoMessage() {}
-
-func (x *GetRoleListReq) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[10]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetRoleListReq.ProtoReflect.Descriptor instead.
-func (*GetRoleListReq) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *GetRoleListReq) GetListOption() *core.ListOption {
-	if x != nil {
-		return x.ListOption
-	}
-	return nil
-}
-
-type GetRoleListRsp struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Paginate *core.Paginate `protobuf:"bytes,1,opt,name=paginate,proto3" json:"paginate,omitempty"`
-	List     []*ModelRole   `protobuf:"bytes,2,rep,name=list,proto3" json:"list,omitempty"`
-}
-
-func (x *GetRoleListRsp) Reset() {
-	*x = GetRoleListRsp{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[11]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *GetRoleListRsp) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetRoleListRsp) ProtoMessage() {}
-
-func (x *GetRoleListRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[11]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetRoleListRsp.ProtoReflect.Descriptor instead.
-func (*GetRoleListRsp) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *GetRoleListRsp) GetPaginate() *core.Paginate {
-	if x != nil {
-		return x.Paginate
-	}
-	return nil
-}
-
-func (x *GetRoleListRsp) GetList() []*ModelRole {
-	if x != nil {
-		return x.List
-	}
-	return nil
-}
-
-type SetRoleStaffReq struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Role *ModelRole `protobuf:"bytes,1,opt,name=role,proto3" json:"role,omitempty"`
-}
-
-func (x *SetRoleStaffReq) Reset() {
-	*x = SetRoleStaffReq{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[12]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *SetRoleStaffReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetRoleStaffReq) ProtoMessage() {}
-
-func (x *SetRoleStaffReq) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[12]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetRoleStaffReq.ProtoReflect.Descriptor instead.
-func (*SetRoleStaffReq) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{12}
-}
-
-func (x *SetRoleStaffReq) GetRole() *ModelRole {
-	if x != nil {
-		return x.Role
-	}
-	return nil
-}
-
-type SetRoleStaffRsp struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-}
-
-func (x *SetRoleStaffRsp) Reset() {
-	*x = SetRoleStaffRsp{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[13]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *SetRoleStaffRsp) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetRoleStaffRsp) ProtoMessage() {}
-
-func (x *SetRoleStaffRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[13]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetRoleStaffRsp.ProtoReflect.Descriptor instead.
-func (*SetRoleStaffRsp) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{13}
-}
-
-type GetDefaultRoleListReq struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-}
-
-func (x *GetDefaultRoleListReq) Reset() {
-	*x = GetDefaultRoleListReq{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[14]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *GetDefaultRoleListReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetDefaultRoleListReq) ProtoMessage() {}
-
-func (x *GetDefaultRoleListReq) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[14]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetDefaultRoleListReq.ProtoReflect.Descriptor instead.
-func (*GetDefaultRoleListReq) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{14}
-}
-
-type GetDefaultRoleListRsp struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	RoleList []*ModelRole `protobuf:"bytes,1,rep,name=role_list,json=roleList,proto3" json:"role_list,omitempty"`
-}
-
-func (x *GetDefaultRoleListRsp) Reset() {
-	*x = GetDefaultRoleListRsp{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[15]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *GetDefaultRoleListRsp) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetDefaultRoleListRsp) ProtoMessage() {}
-
-func (x *GetDefaultRoleListRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[15]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetDefaultRoleListRsp.ProtoReflect.Descriptor instead.
-func (*GetDefaultRoleListRsp) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{15}
-}
-
-func (x *GetDefaultRoleListRsp) GetRoleList() []*ModelRole {
-	if x != nil {
-		return x.RoleList
-	}
-	return nil
-}
-
-type GetPermissionReq struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	// @v: required
-	RoleId uint64 `protobuf:"varint,1,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty" validate:"required"`
-	// @v: required
-	AppType uint32 `protobuf:"varint,2,opt,name=app_type,json=appType,proto3" json:"app_type,omitempty" validate:"required"`
-}
-
-func (x *GetPermissionReq) Reset() {
-	*x = GetPermissionReq{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[16]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *GetPermissionReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetPermissionReq) ProtoMessage() {}
-
-func (x *GetPermissionReq) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[16]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetPermissionReq.ProtoReflect.Descriptor instead.
-func (*GetPermissionReq) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{16}
-}
-
-func (x *GetPermissionReq) GetRoleId() uint64 {
-	if x != nil {
-		return x.RoleId
-	}
-	return 0
-}
-
-func (x *GetPermissionReq) GetAppType() uint32 {
-	if x != nil {
-		return x.AppType
-	}
-	return 0
-}
-
-type GetPermissionRsp struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	PermissionList []*ModelPermission `protobuf:"bytes,1,rep,name=permission_list,json=permissionList,proto3" json:"permission_list,omitempty"`
-}
-
-func (x *GetPermissionRsp) Reset() {
-	*x = GetPermissionRsp{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[17]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *GetPermissionRsp) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetPermissionRsp) ProtoMessage() {}
-
-func (x *GetPermissionRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[17]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetPermissionRsp.ProtoReflect.Descriptor instead.
-func (*GetPermissionRsp) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{17}
-}
-
-func (x *GetPermissionRsp) GetPermissionList() []*ModelPermission {
-	if x != nil {
-		return x.PermissionList
-	}
-	return nil
-}
-
-type AddPermissionReq struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	// @v: required
-	Permission *ModelPermission `protobuf:"bytes,1,opt,name=permission,proto3" json:"permission,omitempty" validate:"required"`
-}
-
-func (x *AddPermissionReq) Reset() {
-	*x = AddPermissionReq{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[18]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *AddPermissionReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AddPermissionReq) ProtoMessage() {}
-
-func (x *AddPermissionReq) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[18]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AddPermissionReq.ProtoReflect.Descriptor instead.
-func (*AddPermissionReq) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{18}
-}
-
-func (x *AddPermissionReq) GetPermission() *ModelPermission {
-	if x != nil {
-		return x.Permission
-	}
-	return nil
-}
-
-type AddPermissionRsp struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Permission *ModelPermission `protobuf:"bytes,1,opt,name=permission,proto3" json:"permission,omitempty"`
-}
-
-func (x *AddPermissionRsp) Reset() {
-	*x = AddPermissionRsp{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[19]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *AddPermissionRsp) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AddPermissionRsp) ProtoMessage() {}
-
-func (x *AddPermissionRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[19]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AddPermissionRsp.ProtoReflect.Descriptor instead.
-func (*AddPermissionRsp) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{19}
-}
-
-func (x *AddPermissionRsp) GetPermission() *ModelPermission {
-	if x != nil {
-		return x.Permission
-	}
-	return nil
-}
-
-type SetPermissionReq struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	// @v: required
-	Permission *ModelPermission `protobuf:"bytes,1,opt,name=permission,proto3" json:"permission,omitempty" validate:"required"`
-}
-
-func (x *SetPermissionReq) Reset() {
-	*x = SetPermissionReq{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[20]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *SetPermissionReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetPermissionReq) ProtoMessage() {}
-
-func (x *SetPermissionReq) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[20]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetPermissionReq.ProtoReflect.Descriptor instead.
-func (*SetPermissionReq) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{20}
-}
-
-func (x *SetPermissionReq) GetPermission() *ModelPermission {
-	if x != nil {
-		return x.Permission
-	}
-	return nil
-}
-
-type SetPermissionRsp struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Permission *ModelPermission `protobuf:"bytes,1,opt,name=permission,proto3" json:"permission,omitempty"`
-}
-
-func (x *SetPermissionRsp) Reset() {
-	*x = SetPermissionRsp{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[21]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *SetPermissionRsp) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetPermissionRsp) ProtoMessage() {}
-
-func (x *SetPermissionRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[21]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetPermissionRsp.ProtoReflect.Descriptor instead.
-func (*SetPermissionRsp) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{21}
-}
+const (
+	GetRoleListReq_ListOptionNil GetRoleListReq_ListOption = 0
+	// @type: string
+	GetRoleListReq_ListOptionName GetRoleListReq_ListOption = 1
+)
 
-func (x *SetPermissionRsp) GetPermission() *ModelPermission {
-	if x != nil {
-		return x.Permission
+// Enum value maps for GetRoleListReq_ListOption.
+var (
+	GetRoleListReq_ListOption_name = map[int32]string{
+		0: "ListOptionNil",
+		1: "ListOptionName",
 	}
-	return nil
-}
-
-type GetPermissionListReq struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	// @v: required
-	ListOption *core.ListOption `protobuf:"bytes,1,opt,name=list_option,json=listOption,proto3" json:"list_option,omitempty" validate:"required"`
-}
-
-func (x *GetPermissionListReq) Reset() {
-	*x = GetPermissionListReq{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[22]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *GetPermissionListReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetPermissionListReq) ProtoMessage() {}
-
-func (x *GetPermissionListReq) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[22]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetPermissionListReq.ProtoReflect.Descriptor instead.
-func (*GetPermissionListReq) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{22}
-}
-
-func (x *GetPermissionListReq) GetListOption() *core.ListOption {
-	if x != nil {
-		return x.ListOption
+	GetRoleListReq_ListOption_value = map[string]int32{
+		"ListOptionNil":  0,
+		"ListOptionName": 1,
 	}
-	return nil
-}
-
-type GetPermissionListRsp struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Paginate *core.Paginate     `protobuf:"bytes,1,opt,name=paginate,proto3" json:"paginate,omitempty"`
-	List     []*ModelPermission `protobuf:"bytes,2,rep,name=list,proto3" json:"list,omitempty"`
-}
+)
 
-func (x *GetPermissionListRsp) Reset() {
-	*x = GetPermissionListRsp{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[23]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
+func (x GetRoleListReq_ListOption) Enum() *GetRoleListReq_ListOption {
+	p := new(GetRoleListReq_ListOption)
+	*p = x
+	return p
 }
 
-func (x *GetPermissionListRsp) String() string {
-	return protoimpl.X.MessageStringOf(x)
+func (x GetRoleListReq_ListOption) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
-
-func (*GetPermissionListRsp) ProtoMessage() {}
 
-func (x *GetPermissionListRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[23]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
+func (GetRoleListReq_ListOption) Descriptor() protoreflect.EnumDescriptor {
+	return file_cmltest_proto_enumTypes[5].Descriptor()
 }
 
-// Deprecated: Use GetPermissionListRsp.ProtoReflect.Descriptor instead.
-func (*GetPermissionListRsp) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{23}
+func (GetRoleListReq_ListOption) Type() protoreflect.EnumType {
+	return &file_cmltest_proto_enumTypes[5]
 }
 
-func (x *GetPermissionListRsp) GetPaginate() *core.Paginate {
-	if x != nil {
-		return x.Paginate
-	}
-	return nil
+func (x GetRoleListReq_ListOption) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
 }
 
-func (x *GetPermissionListRsp) GetList() []*ModelPermission {
-	if x != nil {
-		return x.List
-	}
-	return nil
+// Deprecated: Use GetRoleListReq_ListOption.Descriptor instead.
+func (GetRoleListReq_ListOption) EnumDescriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{23, 0}
 }
 
-type DelPermissionReq struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
+type GetUserRoleListSysReq_ListOption int32
 
-	// @v: required
-	Id uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty" validate:"required"`
-}
+const (
+	GetUserRoleListSysReq_ListOptionNil GetUserRoleListSysReq_ListOption = 0
+	// @type: uint64List
+	GetUserRoleListSysReq_ListOptionUidList GetUserRoleListSysReq_ListOption = 1
+)
 
-func (x *DelPermissionReq) Reset() {
-	*x = DelPermissionReq{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[24]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
+// Enum value maps for GetUserRoleListSysReq_ListOption.
+var (
+	GetUserRoleListSysReq_ListOption_name = map[int32]string{
+		0: "ListOptionNil",
+		1: "ListOptionUidList",
 	}
-}
-
-func (x *DelPermissionReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DelPermissionReq) ProtoMessage() {}
-
-func (x *DelPermissionReq) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[24]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
+	GetUserRoleListSysReq_ListOption_value = map[string]int32{
+		"ListOptionNil":     0,
+		"ListOptionUidList": 1,
 	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DelPermissionReq.ProtoReflect.Descriptor instead.
-func (*DelPermissionReq) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{24}
-}
+)
 
-func (x *DelPermissionReq) GetId() uint64 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
+func (x GetUserRoleListSysReq_ListOption) Enum() *GetUserRoleListSysReq_ListOption {
+	p := new(GetUserRoleListSysReq_ListOption)
+	*p = x
+	return p
 }
 
-type DelPermissionRsp struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
+func (x GetUserRoleListSysReq_ListOption) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (x *DelPermissionRsp) Reset() {
-	*x = DelPermissionRsp{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[25]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
+func (GetUserRoleListSysReq_ListOption) Descriptor() protoreflect.EnumDescriptor {
+	return file_cmltest_proto_enumTypes[6].Descriptor()
 }
 
-func (x *DelPermissionRsp) String() string {
-	return protoimpl.X.MessageStringOf(x)
+func (GetUserRoleListSysReq_ListOption) Type() protoreflect.EnumType {
+	return &file_cmltest_proto_enumTypes[6]
 }
 
-func (*DelPermissionRsp) ProtoMessage() {}
-
-func (x *DelPermissionRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[25]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
+func (x GetUserRoleListSysReq_ListOption) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use DelPermissionRsp.ProtoReflect.Descriptor instead.
-func (*DelPermissionRsp) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{25}
+// Deprecated: Use GetUserRoleListSysReq_ListOption.Descriptor instead.
+func (GetUserRoleListSysReq_ListOption) EnumDescriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{25, 0}
 }
 
 type ModelRole struct {
@@ -1453,14 +402,14 @@ type ModelRole struct {
 	DeletedAt uint32 `protobuf:"varint,4,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`
 	CorpId    uint32 `protobuf:"varint,5,opt,name=corp_id,json=corpId,proto3" json:"corp_id,omitempty"`
 	AppId     uint32 `protobuf:"varint,6,opt,name=app_id,json=appId,proto3" json:"app_id,omitempty"`
-	Type      uint32 `protobuf:"varint,7,opt,name=type,proto3" json:"type,omitempty"`
+	AppType   uint32 `protobuf:"varint,7,opt,name=app_type,json=appType,proto3" json:"app_type,omitempty"`
+	// @ref_type: ModelRole.RoleType
+	RoleType uint32 `protobuf:"varint,8,opt,name=role_type,json=roleType,proto3" json:"role_type,omitempty"`
 	// @gorm: type:varchar(30)
 	// @v: max=30
-	Name string `protobuf:"bytes,8,opt,name=name,proto3" json:"name,omitempty" gorm:"type:varchar(30)" validate:"max=30"`
+	Name string `protobuf:"bytes,9,opt,name=name,proto3" json:"name,omitempty" gorm:"type:varchar(30)" validate:"max=30"`
 	// @desc: 小到大排序
-	ViewOrder uint32 `protobuf:"varint,9,opt,name=view_order,json=viewOrder,proto3" json:"view_order,omitempty"`
-	// @gorm: type: text
-	Detail *ModelRole_Detail `protobuf:"bytes,10,opt,name=detail,proto3" json:"detail,omitempty" gorm:"type:text"`
+	ViewOrder uint32 `protobuf:"varint,10,opt,name=view_order,json=viewOrder,proto3" json:"view_order,omitempty"`
 	// @gorm: type: text
 	Permission *ModelRole_Permission `protobuf:"bytes,11,opt,name=permission,proto3" json:"permission,omitempty" gorm:"type:text"`
 }
@@ -1468,7 +417,7 @@ type ModelRole struct {
 func (x *ModelRole) Reset() {
 	*x = ModelRole{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[26]
+		mi := &file_cmltest_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1481,7 +430,7 @@ func (x *ModelRole) String() string {
 func (*ModelRole) ProtoMessage() {}
 
 func (x *ModelRole) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[26]
+	mi := &file_cmltest_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1494,7 +443,7 @@ func (x *ModelRole) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ModelRole.ProtoReflect.Descriptor instead.
 func (*ModelRole) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{26}
+	return file_cmltest_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *ModelRole) GetId() uint64 {
@@ -1539,9 +488,16 @@ func (x *ModelRole) GetAppId() uint32 {
 	return 0
 }
 
-func (x *ModelRole) GetType() uint32 {
+func (x *ModelRole) GetAppType() uint32 {
 	if x != nil {
-		return x.Type
+		return x.AppType
+	}
+	return 0
+}
+
+func (x *ModelRole) GetRoleType() uint32 {
+	if x != nil {
+		return x.RoleType
 	}
 	return 0
 }
@@ -1558,13 +514,6 @@ func (x *ModelRole) GetViewOrder() uint32 {
 		return x.ViewOrder
 	}
 	return 0
-}
-
-func (x *ModelRole) GetDetail() *ModelRole_Detail {
-	if x != nil {
-		return x.Detail
-	}
-	return nil
 }
 
 func (x *ModelRole) GetPermission() *ModelRole_Permission {
@@ -1592,7 +541,7 @@ type ModelUserRole struct {
 func (x *ModelUserRole) Reset() {
 	*x = ModelUserRole{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[27]
+		mi := &file_cmltest_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1605,7 +554,7 @@ func (x *ModelUserRole) String() string {
 func (*ModelUserRole) ProtoMessage() {}
 
 func (x *ModelUserRole) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[27]
+	mi := &file_cmltest_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1618,7 +567,7 @@ func (x *ModelUserRole) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ModelUserRole.ProtoReflect.Descriptor instead.
 func (*ModelUserRole) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{27}
+	return file_cmltest_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *ModelUserRole) GetId() uint64 {
@@ -1677,6 +626,118 @@ func (x *ModelUserRole) GetRoleId() uint64 {
 	return 0
 }
 
+type ModelRoleResource struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id        uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	CreatedAt uint32 `protobuf:"varint,2,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt uint32 `protobuf:"varint,3,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	DeletedAt uint32 `protobuf:"varint,4,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`
+	CorpId    uint32 `protobuf:"varint,5,opt,name=corp_id,json=corpId,proto3" json:"corp_id,omitempty"`
+	AppId     uint32 `protobuf:"varint,6,opt,name=app_id,json=appId,proto3" json:"app_id,omitempty"`
+	RoleId    uint64 `protobuf:"varint,7,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
+	// @ref_type: ResourceType
+	ResourceType uint32 `protobuf:"varint,8,opt,name=resource_type,json=resourceType,proto3" json:"resource_type,omitempty"`
+	ResourceId   uint64 `protobuf:"varint,9,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+}
+
+func (x *ModelRoleResource) Reset() {
+	*x = ModelRoleResource{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cmltest_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ModelRoleResource) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ModelRoleResource) ProtoMessage() {}
+
+func (x *ModelRoleResource) ProtoReflect() protoreflect.Message {
+	mi := &file_cmltest_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ModelRoleResource.ProtoReflect.Descriptor instead.
+func (*ModelRoleResource) Descriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ModelRoleResource) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *ModelRoleResource) GetCreatedAt() uint32 {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return 0
+}
+
+func (x *ModelRoleResource) GetUpdatedAt() uint32 {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return 0
+}
+
+func (x *ModelRoleResource) GetDeletedAt() uint32 {
+	if x != nil {
+		return x.DeletedAt
+	}
+	return 0
+}
+
+func (x *ModelRoleResource) GetCorpId() uint32 {
+	if x != nil {
+		return x.CorpId
+	}
+	return 0
+}
+
+func (x *ModelRoleResource) GetAppId() uint32 {
+	if x != nil {
+		return x.AppId
+	}
+	return 0
+}
+
+func (x *ModelRoleResource) GetRoleId() uint64 {
+	if x != nil {
+		return x.RoleId
+	}
+	return 0
+}
+
+func (x *ModelRoleResource) GetResourceType() uint32 {
+	if x != nil {
+		return x.ResourceType
+	}
+	return 0
+}
+
+func (x *ModelRoleResource) GetResourceId() uint64 {
+	if x != nil {
+		return x.ResourceId
+	}
+	return 0
+}
+
 type ModelPermission struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1696,9 +757,6 @@ type ModelPermission struct {
 	// @desc: 模块
 	AppType   uint32 `protobuf:"varint,6,opt,name=app_type,json=appType,proto3" json:"app_type,omitempty"`
 	OrderView uint32 `protobuf:"varint,7,opt,name=order_view,json=orderView,proto3" json:"order_view,omitempty"`
-	// @gorm: type: text
-	// @v: max=1000
-	Detail *ModelPermission_Detail `protobuf:"bytes,8,opt,name=detail,proto3" json:"detail,omitempty" gorm:"type:text" validate:"max=1000"`
 	// @desc: 前端专属
 	// @gorm: type: text
 	// @v: max=1000
@@ -1708,7 +766,7 @@ type ModelPermission struct {
 func (x *ModelPermission) Reset() {
 	*x = ModelPermission{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[28]
+		mi := &file_cmltest_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1721,7 +779,7 @@ func (x *ModelPermission) String() string {
 func (*ModelPermission) ProtoMessage() {}
 
 func (x *ModelPermission) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[28]
+	mi := &file_cmltest_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1734,7 +792,7 @@ func (x *ModelPermission) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ModelPermission.ProtoReflect.Descriptor instead.
 func (*ModelPermission) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{28}
+	return file_cmltest_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *ModelPermission) GetId() uint64 {
@@ -1800,13 +858,6 @@ func (x *ModelPermission) GetOrderView() uint32 {
 	return 0
 }
 
-func (x *ModelPermission) GetDetail() *ModelPermission_Detail {
-	if x != nil {
-		return x.Detail
-	}
-	return nil
-}
-
 func (x *ModelPermission) GetRaw() string {
 	if x != nil {
 		return x.Raw
@@ -1814,47 +865,32 @@ func (x *ModelPermission) GetRaw() string {
 	return ""
 }
 
-type ModelMenu struct {
+type AddPermissionReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id        uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	CreatedAt uint32 `protobuf:"varint,2,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt uint32 `protobuf:"varint,3,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	DeletedAt uint32 `protobuf:"varint,4,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`
-	// @gorm: type:varchar(30)
-	// @v: min=1,max=30
-	Name string `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty" gorm:"type:varchar(30)" validate:"min=1,max=30"`
-	// @link_to: ModelMenu
-	ParentId uint64 `protobuf:"varint,6,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
-	// @desc: 展示顺序，越大越靠前
-	ViewOrder uint32 `protobuf:"varint,7,opt,name=view_order,json=viewOrder,proto3" json:"view_order,omitempty"`
-	// @desc: 模块
-	AppType uint32 `protobuf:"varint,8,opt,name=app_type,json=appType,proto3" json:"app_type,omitempty"`
-	// @desc: 绑定的ModelPermission
-	// @gorm: type:text
-	// @v: max=512
-	PermissionIdList []uint64 `protobuf:"varint,9,rep,packed,name=permission_id_list,json=permissionIdList,proto3" json:"permission_id_list,omitempty" gorm:"type:text" validate:"max=512"`
+	// @v: required
+	Permission *ModelPermission `protobuf:"bytes,1,opt,name=permission,proto3" json:"permission,omitempty" validate:"required"`
 }
 
-func (x *ModelMenu) Reset() {
-	*x = ModelMenu{}
+func (x *AddPermissionReq) Reset() {
+	*x = AddPermissionReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[29]
+		mi := &file_cmltest_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *ModelMenu) String() string {
+func (x *AddPermissionReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ModelMenu) ProtoMessage() {}
+func (*AddPermissionReq) ProtoMessage() {}
 
-func (x *ModelMenu) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[29]
+func (x *AddPermissionReq) ProtoReflect() protoreflect.Message {
+	mi := &file_cmltest_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1865,101 +901,786 @@ func (x *ModelMenu) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ModelMenu.ProtoReflect.Descriptor instead.
-func (*ModelMenu) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{29}
+// Deprecated: Use AddPermissionReq.ProtoReflect.Descriptor instead.
+func (*AddPermissionReq) Descriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *ModelMenu) GetId() uint64 {
+func (x *AddPermissionReq) GetPermission() *ModelPermission {
+	if x != nil {
+		return x.Permission
+	}
+	return nil
+}
+
+type AddPermissionRsp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Permission *ModelPermission `protobuf:"bytes,1,opt,name=permission,proto3" json:"permission,omitempty"`
+}
+
+func (x *AddPermissionRsp) Reset() {
+	*x = AddPermissionRsp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cmltest_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AddPermissionRsp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddPermissionRsp) ProtoMessage() {}
+
+func (x *AddPermissionRsp) ProtoReflect() protoreflect.Message {
+	mi := &file_cmltest_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddPermissionRsp.ProtoReflect.Descriptor instead.
+func (*AddPermissionRsp) Descriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *AddPermissionRsp) GetPermission() *ModelPermission {
+	if x != nil {
+		return x.Permission
+	}
+	return nil
+}
+
+type SetPermissionReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// @v: required
+	Permission *ModelPermission `protobuf:"bytes,1,opt,name=permission,proto3" json:"permission,omitempty" validate:"required"`
+}
+
+func (x *SetPermissionReq) Reset() {
+	*x = SetPermissionReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cmltest_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SetPermissionReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetPermissionReq) ProtoMessage() {}
+
+func (x *SetPermissionReq) ProtoReflect() protoreflect.Message {
+	mi := &file_cmltest_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetPermissionReq.ProtoReflect.Descriptor instead.
+func (*SetPermissionReq) Descriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *SetPermissionReq) GetPermission() *ModelPermission {
+	if x != nil {
+		return x.Permission
+	}
+	return nil
+}
+
+type SetPermissionRsp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Permission *ModelPermission `protobuf:"bytes,1,opt,name=permission,proto3" json:"permission,omitempty"`
+}
+
+func (x *SetPermissionRsp) Reset() {
+	*x = SetPermissionRsp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cmltest_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SetPermissionRsp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetPermissionRsp) ProtoMessage() {}
+
+func (x *SetPermissionRsp) ProtoReflect() protoreflect.Message {
+	mi := &file_cmltest_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetPermissionRsp.ProtoReflect.Descriptor instead.
+func (*SetPermissionRsp) Descriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *SetPermissionRsp) GetPermission() *ModelPermission {
+	if x != nil {
+		return x.Permission
+	}
+	return nil
+}
+
+type GetPermissionListReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// @v: required
+	ListOption *core.ListOption `protobuf:"bytes,1,opt,name=list_option,json=listOption,proto3" json:"list_option,omitempty" validate:"required"`
+}
+
+func (x *GetPermissionListReq) Reset() {
+	*x = GetPermissionListReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cmltest_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetPermissionListReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPermissionListReq) ProtoMessage() {}
+
+func (x *GetPermissionListReq) ProtoReflect() protoreflect.Message {
+	mi := &file_cmltest_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPermissionListReq.ProtoReflect.Descriptor instead.
+func (*GetPermissionListReq) Descriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *GetPermissionListReq) GetListOption() *core.ListOption {
+	if x != nil {
+		return x.ListOption
+	}
+	return nil
+}
+
+type GetPermissionListRsp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Paginate *core.Paginate     `protobuf:"bytes,1,opt,name=paginate,proto3" json:"paginate,omitempty"`
+	List     []*ModelPermission `protobuf:"bytes,2,rep,name=list,proto3" json:"list,omitempty"`
+}
+
+func (x *GetPermissionListRsp) Reset() {
+	*x = GetPermissionListRsp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cmltest_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetPermissionListRsp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPermissionListRsp) ProtoMessage() {}
+
+func (x *GetPermissionListRsp) ProtoReflect() protoreflect.Message {
+	mi := &file_cmltest_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPermissionListRsp.ProtoReflect.Descriptor instead.
+func (*GetPermissionListRsp) Descriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GetPermissionListRsp) GetPaginate() *core.Paginate {
+	if x != nil {
+		return x.Paginate
+	}
+	return nil
+}
+
+func (x *GetPermissionListRsp) GetList() []*ModelPermission {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
+type DelPermissionReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// @v: required
+	Id uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty" validate:"required"`
+}
+
+func (x *DelPermissionReq) Reset() {
+	*x = DelPermissionReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cmltest_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DelPermissionReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DelPermissionReq) ProtoMessage() {}
+
+func (x *DelPermissionReq) ProtoReflect() protoreflect.Message {
+	mi := &file_cmltest_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DelPermissionReq.ProtoReflect.Descriptor instead.
+func (*DelPermissionReq) Descriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *DelPermissionReq) GetId() uint64 {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-func (x *ModelMenu) GetCreatedAt() uint32 {
+type DelPermissionRsp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *DelPermissionRsp) Reset() {
+	*x = DelPermissionRsp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cmltest_proto_msgTypes[11]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DelPermissionRsp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DelPermissionRsp) ProtoMessage() {}
+
+func (x *DelPermissionRsp) ProtoReflect() protoreflect.Message {
+	mi := &file_cmltest_proto_msgTypes[11]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DelPermissionRsp.ProtoReflect.Descriptor instead.
+func (*DelPermissionRsp) Descriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{11}
+}
+
+type Resource struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// @ref_type: ResourceType
+	ResourceType   uint32   `protobuf:"varint,1,opt,name=resource_type,json=resourceType,proto3" json:"resource_type,omitempty"`
+	ResourceIdList []uint64 `protobuf:"varint,2,rep,packed,name=resource_id_list,json=resourceIdList,proto3" json:"resource_id_list,omitempty"`
+}
+
+func (x *Resource) Reset() {
+	*x = Resource{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cmltest_proto_msgTypes[12]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Resource) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Resource) ProtoMessage() {}
+
+func (x *Resource) ProtoReflect() protoreflect.Message {
+	mi := &file_cmltest_proto_msgTypes[12]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Resource.ProtoReflect.Descriptor instead.
+func (*Resource) Descriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *Resource) GetResourceType() uint32 {
 	if x != nil {
-		return x.CreatedAt
+		return x.ResourceType
 	}
 	return 0
 }
 
-func (x *ModelMenu) GetUpdatedAt() uint32 {
+func (x *Resource) GetResourceIdList() []uint64 {
 	if x != nil {
-		return x.UpdatedAt
+		return x.ResourceIdList
+	}
+	return nil
+}
+
+type AddRoleReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// @v: required
+	Role         *ModelRole  `protobuf:"bytes,1,opt,name=role,proto3" json:"role,omitempty" validate:"required"`
+	UidList      []uint64    `protobuf:"varint,2,rep,packed,name=uid_list,json=uidList,proto3" json:"uid_list,omitempty"`
+	ResourceList []*Resource `protobuf:"bytes,3,rep,name=resource_list,json=resourceList,proto3" json:"resource_list,omitempty"`
+}
+
+func (x *AddRoleReq) Reset() {
+	*x = AddRoleReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cmltest_proto_msgTypes[13]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AddRoleReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddRoleReq) ProtoMessage() {}
+
+func (x *AddRoleReq) ProtoReflect() protoreflect.Message {
+	mi := &file_cmltest_proto_msgTypes[13]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddRoleReq.ProtoReflect.Descriptor instead.
+func (*AddRoleReq) Descriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *AddRoleReq) GetRole() *ModelRole {
+	if x != nil {
+		return x.Role
+	}
+	return nil
+}
+
+func (x *AddRoleReq) GetUidList() []uint64 {
+	if x != nil {
+		return x.UidList
+	}
+	return nil
+}
+
+func (x *AddRoleReq) GetResourceList() []*Resource {
+	if x != nil {
+		return x.ResourceList
+	}
+	return nil
+}
+
+type AddRoleRsp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Role *ModelRole `protobuf:"bytes,1,opt,name=role,proto3" json:"role,omitempty"`
+}
+
+func (x *AddRoleRsp) Reset() {
+	*x = AddRoleRsp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cmltest_proto_msgTypes[14]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AddRoleRsp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddRoleRsp) ProtoMessage() {}
+
+func (x *AddRoleRsp) ProtoReflect() protoreflect.Message {
+	mi := &file_cmltest_proto_msgTypes[14]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddRoleRsp.ProtoReflect.Descriptor instead.
+func (*AddRoleRsp) Descriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *AddRoleRsp) GetRole() *ModelRole {
+	if x != nil {
+		return x.Role
+	}
+	return nil
+}
+
+type UpdateRoleReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// @v: required
+	Role         *ModelRole  `protobuf:"bytes,1,opt,name=role,proto3" json:"role,omitempty" validate:"required"`
+	UidList      []uint64    `protobuf:"varint,2,rep,packed,name=uid_list,json=uidList,proto3" json:"uid_list,omitempty"`
+	ResourceList []*Resource `protobuf:"bytes,3,rep,name=resource_list,json=resourceList,proto3" json:"resource_list,omitempty"`
+}
+
+func (x *UpdateRoleReq) Reset() {
+	*x = UpdateRoleReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cmltest_proto_msgTypes[15]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateRoleReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateRoleReq) ProtoMessage() {}
+
+func (x *UpdateRoleReq) ProtoReflect() protoreflect.Message {
+	mi := &file_cmltest_proto_msgTypes[15]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateRoleReq.ProtoReflect.Descriptor instead.
+func (*UpdateRoleReq) Descriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *UpdateRoleReq) GetRole() *ModelRole {
+	if x != nil {
+		return x.Role
+	}
+	return nil
+}
+
+func (x *UpdateRoleReq) GetUidList() []uint64 {
+	if x != nil {
+		return x.UidList
+	}
+	return nil
+}
+
+func (x *UpdateRoleReq) GetResourceList() []*Resource {
+	if x != nil {
+		return x.ResourceList
+	}
+	return nil
+}
+
+type UpdateRoleRsp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *UpdateRoleRsp) Reset() {
+	*x = UpdateRoleRsp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cmltest_proto_msgTypes[16]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateRoleRsp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateRoleRsp) ProtoMessage() {}
+
+func (x *UpdateRoleRsp) ProtoReflect() protoreflect.Message {
+	mi := &file_cmltest_proto_msgTypes[16]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateRoleRsp.ProtoReflect.Descriptor instead.
+func (*UpdateRoleRsp) Descriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{16}
+}
+
+type DelRoleReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// @v: required
+	Id uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty" validate:"required"`
+}
+
+func (x *DelRoleReq) Reset() {
+	*x = DelRoleReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cmltest_proto_msgTypes[17]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DelRoleReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DelRoleReq) ProtoMessage() {}
+
+func (x *DelRoleReq) ProtoReflect() protoreflect.Message {
+	mi := &file_cmltest_proto_msgTypes[17]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DelRoleReq.ProtoReflect.Descriptor instead.
+func (*DelRoleReq) Descriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *DelRoleReq) GetId() uint64 {
+	if x != nil {
+		return x.Id
 	}
 	return 0
 }
 
-func (x *ModelMenu) GetDeletedAt() uint32 {
+type DelRoleRsp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *DelRoleRsp) Reset() {
+	*x = DelRoleRsp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cmltest_proto_msgTypes[18]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DelRoleRsp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DelRoleRsp) ProtoMessage() {}
+
+func (x *DelRoleRsp) ProtoReflect() protoreflect.Message {
+	mi := &file_cmltest_proto_msgTypes[18]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DelRoleRsp.ProtoReflect.Descriptor instead.
+func (*DelRoleRsp) Descriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{18}
+}
+
+type CopyRoleReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// @v: required
+	Id uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty" validate:"required"`
+	// @v: max=30
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty" validate:"max=30"`
+}
+
+func (x *CopyRoleReq) Reset() {
+	*x = CopyRoleReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cmltest_proto_msgTypes[19]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CopyRoleReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CopyRoleReq) ProtoMessage() {}
+
+func (x *CopyRoleReq) ProtoReflect() protoreflect.Message {
+	mi := &file_cmltest_proto_msgTypes[19]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CopyRoleReq.ProtoReflect.Descriptor instead.
+func (*CopyRoleReq) Descriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *CopyRoleReq) GetId() uint64 {
 	if x != nil {
-		return x.DeletedAt
+		return x.Id
 	}
 	return 0
 }
 
-func (x *ModelMenu) GetName() string {
+func (x *CopyRoleReq) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *ModelMenu) GetParentId() uint64 {
-	if x != nil {
-		return x.ParentId
-	}
-	return 0
-}
-
-func (x *ModelMenu) GetViewOrder() uint32 {
-	if x != nil {
-		return x.ViewOrder
-	}
-	return 0
-}
-
-func (x *ModelMenu) GetAppType() uint32 {
-	if x != nil {
-		return x.AppType
-	}
-	return 0
-}
-
-func (x *ModelMenu) GetPermissionIdList() []uint64 {
-	if x != nil {
-		return x.PermissionIdList
-	}
-	return nil
-}
-
-type ModelRole_Detail struct {
+type CopyRoleRsp struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	UserCount uint32           `protobuf:"varint,1,opt,name=user_count,json=userCount,proto3" json:"user_count,omitempty"`
-	UserList  []*quan.UserUnit `protobuf:"bytes,2,rep,name=user_list,json=userList,proto3" json:"user_list,omitempty"`
-	RobotList []*quan.UserUnit `protobuf:"bytes,3,rep,name=robot_list,json=robotList,proto3" json:"robot_list,omitempty"`
+	CopyRole *ModelRole `protobuf:"bytes,1,opt,name=copy_role,json=copyRole,proto3" json:"copy_role,omitempty"`
 }
 
-func (x *ModelRole_Detail) Reset() {
-	*x = ModelRole_Detail{}
+func (x *CopyRoleRsp) Reset() {
+	*x = CopyRoleRsp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[30]
+		mi := &file_cmltest_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *ModelRole_Detail) String() string {
+func (x *CopyRoleRsp) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ModelRole_Detail) ProtoMessage() {}
+func (*CopyRoleRsp) ProtoMessage() {}
 
-func (x *ModelRole_Detail) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[30]
+func (x *CopyRoleRsp) ProtoReflect() protoreflect.Message {
+	mi := &file_cmltest_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1970,61 +1691,43 @@ func (x *ModelRole_Detail) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ModelRole_Detail.ProtoReflect.Descriptor instead.
-func (*ModelRole_Detail) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{26, 0}
+// Deprecated: Use CopyRoleRsp.ProtoReflect.Descriptor instead.
+func (*CopyRoleRsp) Descriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *ModelRole_Detail) GetUserCount() uint32 {
+func (x *CopyRoleRsp) GetCopyRole() *ModelRole {
 	if x != nil {
-		return x.UserCount
-	}
-	return 0
-}
-
-func (x *ModelRole_Detail) GetUserList() []*quan.UserUnit {
-	if x != nil {
-		return x.UserList
+		return x.CopyRole
 	}
 	return nil
 }
 
-func (x *ModelRole_Detail) GetRobotList() []*quan.UserUnit {
-	if x != nil {
-		return x.RobotList
-	}
-	return nil
-}
-
-type ModelRole_DataScope struct {
+type SortRoleReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @desc: 角色可见数据范围
-	// @ref_type: Scope
-	Scope uint32 `protobuf:"varint,1,opt,name=scope,proto3" json:"scope,omitempty"`
-	// @desc: 指定范围为指定部门时填写，企微部门id列表
-	WwDeptIdList []uint32 `protobuf:"varint,2,rep,packed,name=ww_dept_id_list,json=wwDeptIdList,proto3" json:"ww_dept_id_list,omitempty"`
+	RoleList []*ModelRole `protobuf:"bytes,1,rep,name=role_list,json=roleList,proto3" json:"role_list,omitempty"`
 }
 
-func (x *ModelRole_DataScope) Reset() {
-	*x = ModelRole_DataScope{}
+func (x *SortRoleReq) Reset() {
+	*x = SortRoleReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[31]
+		mi := &file_cmltest_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *ModelRole_DataScope) String() string {
+func (x *SortRoleReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ModelRole_DataScope) ProtoMessage() {}
+func (*SortRoleReq) ProtoMessage() {}
 
-func (x *ModelRole_DataScope) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[31]
+func (x *SortRoleReq) ProtoReflect() protoreflect.Message {
+	mi := &file_cmltest_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2035,21 +1738,276 @@ func (x *ModelRole_DataScope) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ModelRole_DataScope.ProtoReflect.Descriptor instead.
-func (*ModelRole_DataScope) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{26, 1}
+// Deprecated: Use SortRoleReq.ProtoReflect.Descriptor instead.
+func (*SortRoleReq) Descriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{21}
 }
 
-func (x *ModelRole_DataScope) GetScope() uint32 {
+func (x *SortRoleReq) GetRoleList() []*ModelRole {
 	if x != nil {
-		return x.Scope
+		return x.RoleList
+	}
+	return nil
+}
+
+type SortRoleRsp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *SortRoleRsp) Reset() {
+	*x = SortRoleRsp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cmltest_proto_msgTypes[22]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SortRoleRsp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SortRoleRsp) ProtoMessage() {}
+
+func (x *SortRoleRsp) ProtoReflect() protoreflect.Message {
+	mi := &file_cmltest_proto_msgTypes[22]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SortRoleRsp.ProtoReflect.Descriptor instead.
+func (*SortRoleRsp) Descriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{22}
+}
+
+type GetRoleListReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// @v: required
+	ListOption *core.ListOption `protobuf:"bytes,1,opt,name=list_option,json=listOption,proto3" json:"list_option,omitempty" validate:"required"`
+}
+
+func (x *GetRoleListReq) Reset() {
+	*x = GetRoleListReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cmltest_proto_msgTypes[23]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetRoleListReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetRoleListReq) ProtoMessage() {}
+
+func (x *GetRoleListReq) ProtoReflect() protoreflect.Message {
+	mi := &file_cmltest_proto_msgTypes[23]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetRoleListReq.ProtoReflect.Descriptor instead.
+func (*GetRoleListReq) Descriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *GetRoleListReq) GetListOption() *core.ListOption {
+	if x != nil {
+		return x.ListOption
+	}
+	return nil
+}
+
+type GetRoleListRsp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Paginate *core.Paginate `protobuf:"bytes,1,opt,name=paginate,proto3" json:"paginate,omitempty"`
+	List     []*ModelRole   `protobuf:"bytes,2,rep,name=list,proto3" json:"list,omitempty"`
+}
+
+func (x *GetRoleListRsp) Reset() {
+	*x = GetRoleListRsp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cmltest_proto_msgTypes[24]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetRoleListRsp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetRoleListRsp) ProtoMessage() {}
+
+func (x *GetRoleListRsp) ProtoReflect() protoreflect.Message {
+	mi := &file_cmltest_proto_msgTypes[24]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetRoleListRsp.ProtoReflect.Descriptor instead.
+func (*GetRoleListRsp) Descriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *GetRoleListRsp) GetPaginate() *core.Paginate {
+	if x != nil {
+		return x.Paginate
+	}
+	return nil
+}
+
+func (x *GetRoleListRsp) GetList() []*ModelRole {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
+type GetUserRoleListSysReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// @v: required
+	ListOption *core.ListOption `protobuf:"bytes,1,opt,name=list_option,json=listOption,proto3" json:"list_option,omitempty" validate:"required"`
+	// @v: required
+	CorpId uint32 `protobuf:"varint,2,opt,name=corp_id,json=corpId,proto3" json:"corp_id,omitempty" validate:"required"`
+	// @v: required
+	ApppId uint32 `protobuf:"varint,3,opt,name=appp_id,json=apppId,proto3" json:"appp_id,omitempty" validate:"required"`
+}
+
+func (x *GetUserRoleListSysReq) Reset() {
+	*x = GetUserRoleListSysReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cmltest_proto_msgTypes[25]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetUserRoleListSysReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserRoleListSysReq) ProtoMessage() {}
+
+func (x *GetUserRoleListSysReq) ProtoReflect() protoreflect.Message {
+	mi := &file_cmltest_proto_msgTypes[25]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserRoleListSysReq.ProtoReflect.Descriptor instead.
+func (*GetUserRoleListSysReq) Descriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *GetUserRoleListSysReq) GetListOption() *core.ListOption {
+	if x != nil {
+		return x.ListOption
+	}
+	return nil
+}
+
+func (x *GetUserRoleListSysReq) GetCorpId() uint32 {
+	if x != nil {
+		return x.CorpId
 	}
 	return 0
 }
 
-func (x *ModelRole_DataScope) GetWwDeptIdList() []uint32 {
+func (x *GetUserRoleListSysReq) GetApppId() uint32 {
 	if x != nil {
-		return x.WwDeptIdList
+		return x.ApppId
+	}
+	return 0
+}
+
+type GetUserRoleListSysRsp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Paginate *core.Paginate   `protobuf:"bytes,1,opt,name=paginate,proto3" json:"paginate,omitempty"`
+	List     []*ModelUserRole `protobuf:"bytes,2,rep,name=list,proto3" json:"list,omitempty"`
+}
+
+func (x *GetUserRoleListSysRsp) Reset() {
+	*x = GetUserRoleListSysRsp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cmltest_proto_msgTypes[26]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetUserRoleListSysRsp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserRoleListSysRsp) ProtoMessage() {}
+
+func (x *GetUserRoleListSysRsp) ProtoReflect() protoreflect.Message {
+	mi := &file_cmltest_proto_msgTypes[26]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserRoleListSysRsp.ProtoReflect.Descriptor instead.
+func (*GetUserRoleListSysRsp) Descriptor() ([]byte, []int) {
+	return file_cmltest_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *GetUserRoleListSysRsp) GetPaginate() *core.Paginate {
+	if x != nil {
+		return x.Paginate
+	}
+	return nil
+}
+
+func (x *GetUserRoleListSysRsp) GetList() []*ModelUserRole {
+	if x != nil {
+		return x.List
 	}
 	return nil
 }
@@ -2061,15 +2019,12 @@ type ModelRole_Permission struct {
 
 	// @desc: key 为 service type
 	PermissionMap map[uint32]*ModelRole_Permission_PermissionList `protobuf:"bytes,1,rep,name=permission_map,json=permissionMap,proto3" json:"permission_map,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// @desc: 角色可见应用入口
-	// @ref_type: quan.AppType
-	AppTypeList []uint32 `protobuf:"varint,2,rep,packed,name=app_type_list,json=appTypeList,proto3" json:"app_type_list,omitempty"`
 }
 
 func (x *ModelRole_Permission) Reset() {
 	*x = ModelRole_Permission{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[32]
+		mi := &file_cmltest_proto_msgTypes[27]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2082,7 +2037,7 @@ func (x *ModelRole_Permission) String() string {
 func (*ModelRole_Permission) ProtoMessage() {}
 
 func (x *ModelRole_Permission) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[32]
+	mi := &file_cmltest_proto_msgTypes[27]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2095,19 +2050,12 @@ func (x *ModelRole_Permission) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ModelRole_Permission.ProtoReflect.Descriptor instead.
 func (*ModelRole_Permission) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{26, 2}
+	return file_cmltest_proto_rawDescGZIP(), []int{0, 0}
 }
 
 func (x *ModelRole_Permission) GetPermissionMap() map[uint32]*ModelRole_Permission_PermissionList {
 	if x != nil {
 		return x.PermissionMap
-	}
-	return nil
-}
-
-func (x *ModelRole_Permission) GetAppTypeList() []uint32 {
-	if x != nil {
-		return x.AppTypeList
 	}
 	return nil
 }
@@ -2120,14 +2068,12 @@ type ModelRole_Permission_PermissionList struct {
 	PermissionIdList    []uint64 `protobuf:"varint,1,rep,packed,name=permission_id_list,json=permissionIdList,proto3" json:"permission_id_list,omitempty"`
 	MenuIdList          []uint64 `protobuf:"varint,2,rep,packed,name=menu_id_list,json=menuIdList,proto3" json:"menu_id_list,omitempty"`
 	MenuTemplateConstId string   `protobuf:"bytes,3,opt,name=menu_template_const_id,json=menuTemplateConstId,proto3" json:"menu_template_const_id,omitempty"`
-	// @desc: 数据可见范围
-	DataScope *ModelRole_DataScope `protobuf:"bytes,4,opt,name=data_scope,json=dataScope,proto3" json:"data_scope,omitempty"`
 }
 
 func (x *ModelRole_Permission_PermissionList) Reset() {
 	*x = ModelRole_Permission_PermissionList{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[33]
+		mi := &file_cmltest_proto_msgTypes[28]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2140,7 +2086,7 @@ func (x *ModelRole_Permission_PermissionList) String() string {
 func (*ModelRole_Permission_PermissionList) ProtoMessage() {}
 
 func (x *ModelRole_Permission_PermissionList) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[33]
+	mi := &file_cmltest_proto_msgTypes[28]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2153,7 +2099,7 @@ func (x *ModelRole_Permission_PermissionList) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use ModelRole_Permission_PermissionList.ProtoReflect.Descriptor instead.
 func (*ModelRole_Permission_PermissionList) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{26, 2, 0}
+	return file_cmltest_proto_rawDescGZIP(), []int{0, 0, 0}
 }
 
 func (x *ModelRole_Permission_PermissionList) GetPermissionIdList() []uint64 {
@@ -2177,217 +2123,40 @@ func (x *ModelRole_Permission_PermissionList) GetMenuTemplateConstId() string {
 	return ""
 }
 
-func (x *ModelRole_Permission_PermissionList) GetDataScope() *ModelRole_DataScope {
-	if x != nil {
-		return x.DataScope
-	}
-	return nil
-}
-
-type ModelPermission_Detail struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	ApiList []string `protobuf:"bytes,1,rep,name=api_list,json=apiList,proto3" json:"api_list,omitempty"`
-}
-
-func (x *ModelPermission_Detail) Reset() {
-	*x = ModelPermission_Detail{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cmltest_proto_msgTypes[35]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ModelPermission_Detail) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ModelPermission_Detail) ProtoMessage() {}
-
-func (x *ModelPermission_Detail) ProtoReflect() protoreflect.Message {
-	mi := &file_cmltest_proto_msgTypes[35]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ModelPermission_Detail.ProtoReflect.Descriptor instead.
-func (*ModelPermission_Detail) Descriptor() ([]byte, []int) {
-	return file_cmltest_proto_rawDescGZIP(), []int{28, 0}
-}
-
-func (x *ModelPermission_Detail) GetApiList() []string {
-	if x != nil {
-		return x.ApiList
-	}
-	return nil
-}
-
 var File_cmltest_proto protoreflect.FileDescriptor
 
 var file_cmltest_proto_rawDesc = []byte{
 	0x0a, 0x0d, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12,
 	0x07, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x1a, 0x09, 0x65, 0x78, 0x74, 0x2e, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x1a, 0x0a, 0x71, 0x75, 0x61, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a,
-	0x0a, 0x63, 0x6f, 0x72, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x34, 0x0a, 0x0a, 0x41,
-	0x64, 0x64, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x12, 0x26, 0x0a, 0x04, 0x72, 0x6f, 0x6c,
-	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73,
-	0x74, 0x2e, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x04, 0x72, 0x6f, 0x6c,
-	0x65, 0x22, 0x34, 0x0a, 0x0a, 0x41, 0x64, 0x64, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x73, 0x70, 0x12,
-	0x26, 0x0a, 0x04, 0x72, 0x6f, 0x6c, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x12, 0x2e,
-	0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x52, 0x6f, 0x6c,
-	0x65, 0x52, 0x04, 0x72, 0x6f, 0x6c, 0x65, 0x22, 0x37, 0x0a, 0x0d, 0x55, 0x70, 0x64, 0x61, 0x74,
-	0x65, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x12, 0x26, 0x0a, 0x04, 0x72, 0x6f, 0x6c, 0x65,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74,
-	0x2e, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x04, 0x72, 0x6f, 0x6c, 0x65,
-	0x22, 0x0f, 0x0a, 0x0d, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x73,
-	0x70, 0x22, 0x1c, 0x0a, 0x0a, 0x44, 0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x12,
-	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x22,
-	0x0c, 0x0a, 0x0a, 0x44, 0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x73, 0x70, 0x22, 0x31, 0x0a,
-	0x0b, 0x43, 0x6f, 0x70, 0x79, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x12, 0x0e, 0x0a, 0x02,
-	0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04,
-	0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65,
-	0x22, 0x3e, 0x0a, 0x0b, 0x43, 0x6f, 0x70, 0x79, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x73, 0x70, 0x12,
-	0x2f, 0x0a, 0x09, 0x63, 0x6f, 0x70, 0x79, 0x5f, 0x72, 0x6f, 0x6c, 0x65, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x0b, 0x32, 0x12, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x4d, 0x6f, 0x64,
-	0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x08, 0x63, 0x6f, 0x70, 0x79, 0x52, 0x6f, 0x6c, 0x65,
-	0x22, 0x3e, 0x0a, 0x0b, 0x53, 0x6f, 0x72, 0x74, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x12,
-	0x2f, 0x0a, 0x09, 0x72, 0x6f, 0x6c, 0x65, 0x5f, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x01, 0x20, 0x03,
-	0x28, 0x0b, 0x32, 0x12, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x4d, 0x6f, 0x64,
-	0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x08, 0x72, 0x6f, 0x6c, 0x65, 0x4c, 0x69, 0x73, 0x74,
-	0x22, 0x0d, 0x0a, 0x0b, 0x53, 0x6f, 0x72, 0x74, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x73, 0x70, 0x22,
-	0x96, 0x01, 0x0a, 0x0e, 0x47, 0x65, 0x74, 0x52, 0x6f, 0x6c, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x52,
-	0x65, 0x71, 0x12, 0x31, 0x0a, 0x0b, 0x6c, 0x69, 0x73, 0x74, 0x5f, 0x6f, 0x70, 0x74, 0x69, 0x6f,
-	0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x63, 0x6f, 0x72, 0x65, 0x2e, 0x4c,
-	0x69, 0x73, 0x74, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x0a, 0x6c, 0x69, 0x73, 0x74, 0x4f,
-	0x70, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x51, 0x0a, 0x0a, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x70, 0x74,
-	0x69, 0x6f, 0x6e, 0x12, 0x11, 0x0a, 0x0d, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x70, 0x74, 0x69, 0x6f,
-	0x6e, 0x4e, 0x69, 0x6c, 0x10, 0x00, 0x12, 0x12, 0x0a, 0x0e, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x70,
-	0x74, 0x69, 0x6f, 0x6e, 0x4e, 0x61, 0x6d, 0x65, 0x10, 0x01, 0x12, 0x1c, 0x0a, 0x18, 0x4c, 0x69,
-	0x73, 0x74, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x6e, 0x63, 0x6c, 0x75, 0x64, 0x65, 0x43,
-	0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x10, 0x02, 0x22, 0x64, 0x0a, 0x0e, 0x47, 0x65, 0x74, 0x52,
-	0x6f, 0x6c, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x73, 0x70, 0x12, 0x2a, 0x0a, 0x08, 0x70, 0x61,
-	0x67, 0x69, 0x6e, 0x61, 0x74, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x63,
-	0x6f, 0x72, 0x65, 0x2e, 0x50, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x65, 0x52, 0x08, 0x70, 0x61,
-	0x67, 0x69, 0x6e, 0x61, 0x74, 0x65, 0x12, 0x26, 0x0a, 0x04, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x02,
-	0x20, 0x03, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x4d,
-	0x6f, 0x64, 0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x04, 0x6c, 0x69, 0x73, 0x74, 0x22, 0x39,
-	0x0a, 0x0f, 0x53, 0x65, 0x74, 0x52, 0x6f, 0x6c, 0x65, 0x53, 0x74, 0x61, 0x66, 0x66, 0x52, 0x65,
-	0x71, 0x12, 0x26, 0x0a, 0x04, 0x72, 0x6f, 0x6c, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
-	0x12, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x52,
-	0x6f, 0x6c, 0x65, 0x52, 0x04, 0x72, 0x6f, 0x6c, 0x65, 0x22, 0x11, 0x0a, 0x0f, 0x53, 0x65, 0x74,
-	0x52, 0x6f, 0x6c, 0x65, 0x53, 0x74, 0x61, 0x66, 0x66, 0x52, 0x73, 0x70, 0x22, 0x17, 0x0a, 0x15,
-	0x47, 0x65, 0x74, 0x44, 0x65, 0x66, 0x61, 0x75, 0x6c, 0x74, 0x52, 0x6f, 0x6c, 0x65, 0x4c, 0x69,
-	0x73, 0x74, 0x52, 0x65, 0x71, 0x22, 0x48, 0x0a, 0x15, 0x47, 0x65, 0x74, 0x44, 0x65, 0x66, 0x61,
-	0x75, 0x6c, 0x74, 0x52, 0x6f, 0x6c, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x73, 0x70, 0x12, 0x2f,
-	0x0a, 0x09, 0x72, 0x6f, 0x6c, 0x65, 0x5f, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x01, 0x20, 0x03, 0x28,
-	0x0b, 0x32, 0x12, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x4d, 0x6f, 0x64, 0x65,
-	0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x08, 0x72, 0x6f, 0x6c, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x22,
-	0x46, 0x0a, 0x10, 0x47, 0x65, 0x74, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e,
-	0x52, 0x65, 0x71, 0x12, 0x17, 0x0a, 0x07, 0x72, 0x6f, 0x6c, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x72, 0x6f, 0x6c, 0x65, 0x49, 0x64, 0x12, 0x19, 0x0a, 0x08,
-	0x61, 0x70, 0x70, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x07,
-	0x61, 0x70, 0x70, 0x54, 0x79, 0x70, 0x65, 0x22, 0x55, 0x0a, 0x10, 0x47, 0x65, 0x74, 0x50, 0x65,
-	0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x73, 0x70, 0x12, 0x41, 0x0a, 0x0f, 0x70,
-	0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x5f, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x01,
-	0x20, 0x03, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x4d,
-	0x6f, 0x64, 0x65, 0x6c, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x0e,
-	0x70, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4c, 0x69, 0x73, 0x74, 0x22, 0x4c,
-	0x0a, 0x10, 0x41, 0x64, 0x64, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52,
-	0x65, 0x71, 0x12, 0x38, 0x0a, 0x0a, 0x70, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74,
-	0x2e, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e,
-	0x52, 0x0a, 0x70, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x22, 0x4c, 0x0a, 0x10,
-	0x41, 0x64, 0x64, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x73, 0x70,
-	0x12, 0x38, 0x0a, 0x0a, 0x70, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x4d,
-	0x6f, 0x64, 0x65, 0x6c, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x0a,
-	0x70, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x22, 0x4c, 0x0a, 0x10, 0x53, 0x65,
-	0x74, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x12, 0x38,
-	0x0a, 0x0a, 0x70, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x0b, 0x32, 0x18, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x4d, 0x6f, 0x64,
-	0x65, 0x6c, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x0a, 0x70, 0x65,
-	0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x22, 0x4c, 0x0a, 0x10, 0x53, 0x65, 0x74, 0x50,
-	0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x73, 0x70, 0x12, 0x38, 0x0a, 0x0a,
-	0x70, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
-	0x32, 0x18, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x4d, 0x6f, 0x64, 0x65, 0x6c,
-	0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x0a, 0x70, 0x65, 0x72, 0x6d,
-	0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x22, 0x85, 0x01, 0x0a, 0x14, 0x47, 0x65, 0x74, 0x50, 0x65,
-	0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x12,
-	0x31, 0x0a, 0x0b, 0x6c, 0x69, 0x73, 0x74, 0x5f, 0x6f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x63, 0x6f, 0x72, 0x65, 0x2e, 0x4c, 0x69, 0x73, 0x74,
-	0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x0a, 0x6c, 0x69, 0x73, 0x74, 0x4f, 0x70, 0x74, 0x69,
-	0x6f, 0x6e, 0x22, 0x3a, 0x0a, 0x0a, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e,
-	0x12, 0x11, 0x0a, 0x0d, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x4e, 0x69,
-	0x6c, 0x10, 0x00, 0x12, 0x19, 0x0a, 0x15, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x70, 0x74, 0x69, 0x6f,
-	0x6e, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x54, 0x79, 0x70, 0x65, 0x10, 0x01, 0x22, 0x70,
-	0x0a, 0x14, 0x47, 0x65, 0x74, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4c,
-	0x69, 0x73, 0x74, 0x52, 0x73, 0x70, 0x12, 0x2a, 0x0a, 0x08, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61,
-	0x74, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x63, 0x6f, 0x72, 0x65, 0x2e,
-	0x50, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x65, 0x52, 0x08, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61,
-	0x74, 0x65, 0x12, 0x2c, 0x0a, 0x04, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b,
-	0x32, 0x18, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x4d, 0x6f, 0x64, 0x65, 0x6c,
-	0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x04, 0x6c, 0x69, 0x73, 0x74,
-	0x22, 0x22, 0x0a, 0x10, 0x44, 0x65, 0x6c, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f,
-	0x6e, 0x52, 0x65, 0x71, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04,
-	0x52, 0x02, 0x69, 0x64, 0x22, 0x12, 0x0a, 0x10, 0x44, 0x65, 0x6c, 0x50, 0x65, 0x72, 0x6d, 0x69,
-	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x73, 0x70, 0x22, 0xb4, 0x09, 0x0a, 0x09, 0x4d, 0x6f, 0x64,
-	0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65,
-	0x64, 0x5f, 0x61, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61,
-	0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64,
-	0x5f, 0x61, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74,
-	0x65, 0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x5f,
-	0x61, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x09, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65,
-	0x64, 0x41, 0x74, 0x12, 0x17, 0x0a, 0x07, 0x63, 0x6f, 0x72, 0x70, 0x5f, 0x69, 0x64, 0x18, 0x05,
-	0x20, 0x01, 0x28, 0x0d, 0x52, 0x06, 0x63, 0x6f, 0x72, 0x70, 0x49, 0x64, 0x12, 0x15, 0x0a, 0x06,
-	0x61, 0x70, 0x70, 0x5f, 0x69, 0x64, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x05, 0x61, 0x70,
-	0x70, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x07, 0x20, 0x01, 0x28,
-	0x0d, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18,
-	0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x76,
-	0x69, 0x65, 0x77, 0x5f, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x18, 0x09, 0x20, 0x01, 0x28, 0x0d, 0x52,
-	0x09, 0x76, 0x69, 0x65, 0x77, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x12, 0x31, 0x0a, 0x06, 0x64, 0x65,
-	0x74, 0x61, 0x69, 0x6c, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x63, 0x6d, 0x6c,
-	0x74, 0x65, 0x73, 0x74, 0x2e, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x2e, 0x44,
-	0x65, 0x74, 0x61, 0x69, 0x6c, 0x52, 0x06, 0x64, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x12, 0x3d, 0x0a,
-	0x0a, 0x70, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x0b, 0x20, 0x01, 0x28,
-	0x0b, 0x32, 0x1d, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x4d, 0x6f, 0x64, 0x65,
-	0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x2e, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e,
-	0x52, 0x0a, 0x70, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x1a, 0x83, 0x01, 0x0a,
-	0x06, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x12, 0x1d, 0x0a, 0x0a, 0x75, 0x73, 0x65, 0x72, 0x5f,
-	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x09, 0x75, 0x73, 0x65,
-	0x72, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x2b, 0x0a, 0x09, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x6c,
-	0x69, 0x73, 0x74, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x71, 0x75, 0x61, 0x6e,
-	0x2e, 0x55, 0x73, 0x65, 0x72, 0x55, 0x6e, 0x69, 0x74, 0x52, 0x08, 0x75, 0x73, 0x65, 0x72, 0x4c,
-	0x69, 0x73, 0x74, 0x12, 0x2d, 0x0a, 0x0a, 0x72, 0x6f, 0x62, 0x6f, 0x74, 0x5f, 0x6c, 0x69, 0x73,
-	0x74, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x71, 0x75, 0x61, 0x6e, 0x2e, 0x55,
-	0x73, 0x65, 0x72, 0x55, 0x6e, 0x69, 0x74, 0x52, 0x09, 0x72, 0x6f, 0x62, 0x6f, 0x74, 0x4c, 0x69,
-	0x73, 0x74, 0x1a, 0x8b, 0x01, 0x0a, 0x09, 0x44, 0x61, 0x74, 0x61, 0x53, 0x63, 0x6f, 0x70, 0x65,
-	0x12, 0x14, 0x0a, 0x05, 0x73, 0x63, 0x6f, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52,
-	0x05, 0x73, 0x63, 0x6f, 0x70, 0x65, 0x12, 0x25, 0x0a, 0x0f, 0x77, 0x77, 0x5f, 0x64, 0x65, 0x70,
-	0x74, 0x5f, 0x69, 0x64, 0x5f, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0d, 0x52,
-	0x0c, 0x77, 0x77, 0x44, 0x65, 0x70, 0x74, 0x49, 0x64, 0x4c, 0x69, 0x73, 0x74, 0x22, 0x41, 0x0a,
-	0x05, 0x53, 0x63, 0x6f, 0x70, 0x65, 0x12, 0x0c, 0x0a, 0x08, 0x53, 0x63, 0x6f, 0x70, 0x65, 0x4e,
-	0x69, 0x6c, 0x10, 0x00, 0x12, 0x0c, 0x0a, 0x08, 0x53, 0x63, 0x6f, 0x70, 0x65, 0x41, 0x6c, 0x6c,
-	0x10, 0x01, 0x12, 0x0d, 0x0a, 0x09, 0x53, 0x63, 0x6f, 0x70, 0x65, 0x53, 0x65, 0x6c, 0x66, 0x10,
-	0x02, 0x12, 0x0d, 0x0a, 0x09, 0x53, 0x63, 0x6f, 0x70, 0x65, 0x44, 0x65, 0x70, 0x74, 0x10, 0x03,
-	0x1a, 0xce, 0x03, 0x0a, 0x0a, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x12,
-	0x57, 0x0a, 0x0e, 0x70, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x5f, 0x6d, 0x61,
-	0x70, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x30, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73,
-	0x74, 0x2e, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x2e, 0x50, 0x65, 0x72, 0x6d,
-	0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x2e, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f,
-	0x6e, 0x4d, 0x61, 0x70, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x0d, 0x70, 0x65, 0x72, 0x6d, 0x69,
-	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4d, 0x61, 0x70, 0x12, 0x22, 0x0a, 0x0d, 0x61, 0x70, 0x70, 0x5f,
-	0x74, 0x79, 0x70, 0x65, 0x5f, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0d, 0x52,
-	0x0b, 0x61, 0x70, 0x70, 0x54, 0x79, 0x70, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x1a, 0xd2, 0x01, 0x0a,
+	0x6f, 0x74, 0x6f, 0x1a, 0x0a, 0x63, 0x6f, 0x72, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22,
+	0x8d, 0x06, 0x0a, 0x09, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x12, 0x0e, 0x0a,
+	0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1d, 0x0a,
+	0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x0d, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a, 0x0a,
+	0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0d,
+	0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x64,
+	0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0d, 0x52,
+	0x09, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x17, 0x0a, 0x07, 0x63, 0x6f,
+	0x72, 0x70, 0x5f, 0x69, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x06, 0x63, 0x6f, 0x72,
+	0x70, 0x49, 0x64, 0x12, 0x15, 0x0a, 0x06, 0x61, 0x70, 0x70, 0x5f, 0x69, 0x64, 0x18, 0x06, 0x20,
+	0x01, 0x28, 0x0d, 0x52, 0x05, 0x61, 0x70, 0x70, 0x49, 0x64, 0x12, 0x19, 0x0a, 0x08, 0x61, 0x70,
+	0x70, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x07, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x07, 0x61, 0x70,
+	0x70, 0x54, 0x79, 0x70, 0x65, 0x12, 0x1b, 0x0a, 0x09, 0x72, 0x6f, 0x6c, 0x65, 0x5f, 0x74, 0x79,
+	0x70, 0x65, 0x18, 0x08, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x08, 0x72, 0x6f, 0x6c, 0x65, 0x54, 0x79,
+	0x70, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x76, 0x69, 0x65, 0x77, 0x5f, 0x6f,
+	0x72, 0x64, 0x65, 0x72, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x09, 0x76, 0x69, 0x65, 0x77,
+	0x4f, 0x72, 0x64, 0x65, 0x72, 0x12, 0x3d, 0x0a, 0x0a, 0x70, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73,
+	0x69, 0x6f, 0x6e, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1d, 0x2e, 0x63, 0x6d, 0x6c, 0x74,
+	0x65, 0x73, 0x74, 0x2e, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x2e, 0x50, 0x65,
+	0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x0a, 0x70, 0x65, 0x72, 0x6d, 0x69, 0x73,
+	0x73, 0x69, 0x6f, 0x6e, 0x1a, 0xed, 0x02, 0x0a, 0x0a, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73,
+	0x69, 0x6f, 0x6e, 0x12, 0x57, 0x0a, 0x0e, 0x70, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f,
+	0x6e, 0x5f, 0x6d, 0x61, 0x70, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x30, 0x2e, 0x63, 0x6d,
+	0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x2e,
+	0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x2e, 0x50, 0x65, 0x72, 0x6d, 0x69,
+	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4d, 0x61, 0x70, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x0d, 0x70,
+	0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4d, 0x61, 0x70, 0x1a, 0x95, 0x01, 0x0a,
 	0x0e, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4c, 0x69, 0x73, 0x74, 0x12,
 	0x2c, 0x0a, 0x12, 0x70, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64,
 	0x5f, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x01, 0x20, 0x03, 0x28, 0x04, 0x52, 0x10, 0x70, 0x65, 0x72,
@@ -2397,24 +2166,18 @@ var file_cmltest_proto_rawDesc = []byte{
 	0x33, 0x0a, 0x16, 0x6d, 0x65, 0x6e, 0x75, 0x5f, 0x74, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65,
 	0x5f, 0x63, 0x6f, 0x6e, 0x73, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x13, 0x6d, 0x65, 0x6e, 0x75, 0x54, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x43, 0x6f, 0x6e,
-	0x73, 0x74, 0x49, 0x64, 0x12, 0x3b, 0x0a, 0x0a, 0x64, 0x61, 0x74, 0x61, 0x5f, 0x73, 0x63, 0x6f,
-	0x70, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1c, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65,
-	0x73, 0x74, 0x2e, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x2e, 0x44, 0x61, 0x74,
-	0x61, 0x53, 0x63, 0x6f, 0x70, 0x65, 0x52, 0x09, 0x64, 0x61, 0x74, 0x61, 0x53, 0x63, 0x6f, 0x70,
-	0x65, 0x1a, 0x6e, 0x0a, 0x12, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4d,
-	0x61, 0x70, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x0d, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x42, 0x0a, 0x05, 0x76, 0x61, 0x6c,
-	0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2c, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65,
-	0x73, 0x74, 0x2e, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x2e, 0x50, 0x65, 0x72,
-	0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x2e, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69,
-	0x6f, 0x6e, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38,
-	0x01, 0x22, 0x6c, 0x0a, 0x08, 0x52, 0x6f, 0x6c, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x0f, 0x0a,
-	0x0b, 0x52, 0x6f, 0x6c, 0x65, 0x54, 0x79, 0x70, 0x65, 0x4e, 0x69, 0x6c, 0x10, 0x00, 0x12, 0x13,
-	0x0a, 0x0f, 0x52, 0x6f, 0x6c, 0x65, 0x54, 0x79, 0x70, 0x65, 0x43, 0x72, 0x65, 0x61, 0x74, 0x6f,
-	0x72, 0x10, 0x01, 0x12, 0x11, 0x0a, 0x0d, 0x52, 0x6f, 0x6c, 0x65, 0x54, 0x79, 0x70, 0x65, 0x41,
-	0x64, 0x6d, 0x69, 0x6e, 0x10, 0x02, 0x12, 0x13, 0x0a, 0x0f, 0x52, 0x6f, 0x6c, 0x65, 0x54, 0x79,
-	0x70, 0x65, 0x44, 0x65, 0x66, 0x61, 0x75, 0x6c, 0x74, 0x10, 0x03, 0x12, 0x12, 0x0a, 0x0e, 0x52,
-	0x6f, 0x6c, 0x65, 0x54, 0x79, 0x70, 0x65, 0x4e, 0x6f, 0x72, 0x6d, 0x61, 0x6c, 0x10, 0x04, 0x22,
+	0x73, 0x74, 0x49, 0x64, 0x1a, 0x6e, 0x0a, 0x12, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69,
+	0x6f, 0x6e, 0x4d, 0x61, 0x70, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65,
+	0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x42, 0x0a, 0x05,
+	0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2c, 0x2e, 0x63, 0x6d,
+	0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x2e,
+	0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x2e, 0x50, 0x65, 0x72, 0x6d, 0x69,
+	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65,
+	0x3a, 0x02, 0x38, 0x01, 0x22, 0x49, 0x0a, 0x08, 0x52, 0x6f, 0x6c, 0x65, 0x54, 0x79, 0x70, 0x65,
+	0x12, 0x0f, 0x0a, 0x0b, 0x52, 0x6f, 0x6c, 0x65, 0x54, 0x79, 0x70, 0x65, 0x4e, 0x69, 0x6c, 0x10,
+	0x00, 0x12, 0x16, 0x0a, 0x12, 0x52, 0x6f, 0x6c, 0x65, 0x54, 0x79, 0x70, 0x65, 0x53, 0x75, 0x70,
+	0x65, 0x72, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x10, 0x01, 0x12, 0x14, 0x0a, 0x10, 0x52, 0x6f, 0x6c,
+	0x65, 0x54, 0x79, 0x70, 0x65, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x6f, 0x72, 0x10, 0x02, 0x22,
 	0xd7, 0x01, 0x0a, 0x0d, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x55, 0x73, 0x65, 0x72, 0x52, 0x6f, 0x6c,
 	0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x02, 0x69,
 	0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18,
@@ -2428,86 +2191,181 @@ var file_cmltest_proto_rawDesc = []byte{
 	0x64, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x05, 0x61, 0x70, 0x70, 0x49, 0x64, 0x12, 0x10,
 	0x0a, 0x03, 0x75, 0x69, 0x64, 0x18, 0x07, 0x20, 0x01, 0x28, 0x04, 0x52, 0x03, 0x75, 0x69, 0x64,
 	0x12, 0x17, 0x0a, 0x07, 0x72, 0x6f, 0x6c, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x08, 0x20, 0x01, 0x28,
-	0x04, 0x52, 0x06, 0x72, 0x6f, 0x6c, 0x65, 0x49, 0x64, 0x22, 0xf4, 0x02, 0x0a, 0x0f, 0x4d, 0x6f,
-	0x64, 0x65, 0x6c, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x0e, 0x0a,
-	0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1d, 0x0a,
-	0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28,
-	0x0d, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a, 0x0a,
-	0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0d,
-	0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x64,
-	0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0d, 0x52,
-	0x09, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1b, 0x0a, 0x09, 0x70, 0x61,
-	0x72, 0x65, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x70,
-	0x61, 0x72, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18,
-	0x0b, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x19, 0x0a, 0x08, 0x63,
-	0x6f, 0x6e, 0x73, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63,
-	0x6f, 0x6e, 0x73, 0x74, 0x49, 0x64, 0x12, 0x19, 0x0a, 0x08, 0x61, 0x70, 0x70, 0x5f, 0x74, 0x79,
-	0x70, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x07, 0x61, 0x70, 0x70, 0x54, 0x79, 0x70,
-	0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f, 0x76, 0x69, 0x65, 0x77, 0x18,
-	0x07, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x09, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x56, 0x69, 0x65, 0x77,
-	0x12, 0x37, 0x0a, 0x06, 0x64, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x18, 0x08, 0x20, 0x01, 0x28, 0x0b,
-	0x32, 0x1f, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x4d, 0x6f, 0x64, 0x65, 0x6c,
-	0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x2e, 0x44, 0x65, 0x74, 0x61, 0x69,
-	0x6c, 0x52, 0x06, 0x64, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x12, 0x10, 0x0a, 0x03, 0x72, 0x61, 0x77,
-	0x18, 0x09, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x72, 0x61, 0x77, 0x1a, 0x23, 0x0a, 0x06, 0x44,
-	0x65, 0x74, 0x61, 0x69, 0x6c, 0x12, 0x19, 0x0a, 0x08, 0x61, 0x70, 0x69, 0x5f, 0x6c, 0x69, 0x73,
-	0x74, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09, 0x52, 0x07, 0x61, 0x70, 0x69, 0x4c, 0x69, 0x73, 0x74,
-	0x22, 0x91, 0x02, 0x0a, 0x09, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x4d, 0x65, 0x6e, 0x75, 0x12, 0x0e,
-	0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1d,
-	0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x0d, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a,
-	0x0a, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28,
-	0x0d, 0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a, 0x0a,
-	0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0d,
-	0x52, 0x09, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e,
-	0x61, 0x6d, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12,
-	0x1b, 0x0a, 0x09, 0x70, 0x61, 0x72, 0x65, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x06, 0x20, 0x01,
-	0x28, 0x04, 0x52, 0x08, 0x70, 0x61, 0x72, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x1d, 0x0a, 0x0a,
-	0x76, 0x69, 0x65, 0x77, 0x5f, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x18, 0x07, 0x20, 0x01, 0x28, 0x0d,
-	0x52, 0x09, 0x76, 0x69, 0x65, 0x77, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x12, 0x19, 0x0a, 0x08, 0x61,
-	0x70, 0x70, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x08, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x07, 0x61,
-	0x70, 0x70, 0x54, 0x79, 0x70, 0x65, 0x12, 0x2c, 0x0a, 0x12, 0x70, 0x65, 0x72, 0x6d, 0x69, 0x73,
-	0x73, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x5f, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x09, 0x20, 0x03,
-	0x28, 0x04, 0x52, 0x10, 0x70, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x49, 0x64,
-	0x4c, 0x69, 0x73, 0x74, 0x32, 0xad, 0x07, 0x0a, 0x07, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74,
-	0x12, 0x35, 0x0a, 0x07, 0x41, 0x64, 0x64, 0x52, 0x6f, 0x6c, 0x65, 0x12, 0x13, 0x2e, 0x63, 0x6d,
-	0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x41, 0x64, 0x64, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x65, 0x71,
-	0x1a, 0x13, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x41, 0x64, 0x64, 0x52, 0x6f,
-	0x6c, 0x65, 0x52, 0x73, 0x70, 0x22, 0x00, 0x12, 0x3e, 0x0a, 0x0a, 0x55, 0x70, 0x64, 0x61, 0x74,
-	0x65, 0x52, 0x6f, 0x6c, 0x65, 0x12, 0x16, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e,
-	0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x16, 0x2e,
-	0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x52, 0x6f,
-	0x6c, 0x65, 0x52, 0x73, 0x70, 0x22, 0x00, 0x12, 0x35, 0x0a, 0x07, 0x44, 0x65, 0x6c, 0x52, 0x6f,
-	0x6c, 0x65, 0x12, 0x13, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x44, 0x65, 0x6c,
-	0x52, 0x6f, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x13, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73,
-	0x74, 0x2e, 0x44, 0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x73, 0x70, 0x22, 0x00, 0x12, 0x38,
-	0x0a, 0x08, 0x43, 0x6f, 0x70, 0x79, 0x52, 0x6f, 0x6c, 0x65, 0x12, 0x14, 0x2e, 0x63, 0x6d, 0x6c,
-	0x74, 0x65, 0x73, 0x74, 0x2e, 0x43, 0x6f, 0x70, 0x79, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x65, 0x71,
-	0x1a, 0x14, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x43, 0x6f, 0x70, 0x79, 0x52,
-	0x6f, 0x6c, 0x65, 0x52, 0x73, 0x70, 0x22, 0x00, 0x12, 0x38, 0x0a, 0x08, 0x53, 0x6f, 0x72, 0x74,
-	0x52, 0x6f, 0x6c, 0x65, 0x12, 0x14, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x53,
-	0x6f, 0x72, 0x74, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x14, 0x2e, 0x63, 0x6d, 0x6c,
-	0x74, 0x65, 0x73, 0x74, 0x2e, 0x53, 0x6f, 0x72, 0x74, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x73, 0x70,
-	0x22, 0x00, 0x12, 0x41, 0x0a, 0x0b, 0x47, 0x65, 0x74, 0x52, 0x6f, 0x6c, 0x65, 0x4c, 0x69, 0x73,
-	0x74, 0x12, 0x17, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x47, 0x65, 0x74, 0x52,
-	0x6f, 0x6c, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x1a, 0x17, 0x2e, 0x63, 0x6d, 0x6c,
-	0x74, 0x65, 0x73, 0x74, 0x2e, 0x47, 0x65, 0x74, 0x52, 0x6f, 0x6c, 0x65, 0x4c, 0x69, 0x73, 0x74,
-	0x52, 0x73, 0x70, 0x22, 0x00, 0x12, 0x4e, 0x0a, 0x0c, 0x53, 0x65, 0x74, 0x52, 0x6f, 0x6c, 0x65,
-	0x53, 0x74, 0x61, 0x66, 0x66, 0x12, 0x18, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e,
-	0x53, 0x65, 0x74, 0x52, 0x6f, 0x6c, 0x65, 0x53, 0x74, 0x61, 0x66, 0x66, 0x52, 0x65, 0x71, 0x1a,
-	0x18, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x53, 0x65, 0x74, 0x52, 0x6f, 0x6c,
-	0x65, 0x53, 0x74, 0x61, 0x66, 0x66, 0x52, 0x73, 0x70, 0x22, 0x0a, 0x9a, 0xc8, 0xd0, 0x07, 0x05,
-	0x73, 0x74, 0x61, 0x66, 0x66, 0x12, 0x56, 0x0a, 0x12, 0x47, 0x65, 0x74, 0x44, 0x65, 0x66, 0x61,
-	0x75, 0x6c, 0x74, 0x52, 0x6f, 0x6c, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x1e, 0x2e, 0x63, 0x6d,
-	0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x47, 0x65, 0x74, 0x44, 0x65, 0x66, 0x61, 0x75, 0x6c, 0x74,
-	0x52, 0x6f, 0x6c, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x1a, 0x1e, 0x2e, 0x63, 0x6d,
-	0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x47, 0x65, 0x74, 0x44, 0x65, 0x66, 0x61, 0x75, 0x6c, 0x74,
-	0x52, 0x6f, 0x6c, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x73, 0x70, 0x22, 0x00, 0x12, 0x47, 0x0a,
-	0x0d, 0x47, 0x65, 0x74, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x19,
-	0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x47, 0x65, 0x74, 0x50, 0x65, 0x72, 0x6d,
-	0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x1a, 0x19, 0x2e, 0x63, 0x6d, 0x6c, 0x74,
-	0x65, 0x73, 0x74, 0x2e, 0x47, 0x65, 0x74, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f,
-	0x6e, 0x52, 0x73, 0x70, 0x22, 0x00, 0x12, 0x51, 0x0a, 0x0d, 0x41, 0x64, 0x64, 0x50, 0x65, 0x72,
+	0x04, 0x52, 0x06, 0x72, 0x6f, 0x6c, 0x65, 0x49, 0x64, 0x22, 0x8f, 0x02, 0x0a, 0x11, 0x4d, 0x6f,
+	0x64, 0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x12,
+	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x12,
+	0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x0d, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d,
+	0x0a, 0x0a, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x0d, 0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a,
+	0x0a, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28,
+	0x0d, 0x52, 0x09, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x17, 0x0a, 0x07,
+	0x63, 0x6f, 0x72, 0x70, 0x5f, 0x69, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x06, 0x63,
+	0x6f, 0x72, 0x70, 0x49, 0x64, 0x12, 0x15, 0x0a, 0x06, 0x61, 0x70, 0x70, 0x5f, 0x69, 0x64, 0x18,
+	0x06, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x05, 0x61, 0x70, 0x70, 0x49, 0x64, 0x12, 0x17, 0x0a, 0x07,
+	0x72, 0x6f, 0x6c, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x07, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x72,
+	0x6f, 0x6c, 0x65, 0x49, 0x64, 0x12, 0x23, 0x0a, 0x0d, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63,
+	0x65, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x08, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x0c, 0x72, 0x65,
+	0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x72, 0x65,
+	0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x09, 0x20, 0x01, 0x28, 0x04, 0x52,
+	0x0a, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x49, 0x64, 0x22, 0x96, 0x02, 0x0a, 0x0f,
+	0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x12,
+	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x12,
+	0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x0d, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d,
+	0x0a, 0x0a, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x0d, 0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a,
+	0x0a, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28,
+	0x0d, 0x52, 0x09, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1b, 0x0a, 0x09,
+	0x70, 0x61, 0x72, 0x65, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x52,
+	0x08, 0x70, 0x61, 0x72, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d,
+	0x65, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x19, 0x0a,
+	0x08, 0x63, 0x6f, 0x6e, 0x73, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x07, 0x63, 0x6f, 0x6e, 0x73, 0x74, 0x49, 0x64, 0x12, 0x19, 0x0a, 0x08, 0x61, 0x70, 0x70, 0x5f,
+	0x74, 0x79, 0x70, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x07, 0x61, 0x70, 0x70, 0x54,
+	0x79, 0x70, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f, 0x76, 0x69, 0x65,
+	0x77, 0x18, 0x07, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x09, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x56, 0x69,
+	0x65, 0x77, 0x12, 0x10, 0x0a, 0x03, 0x72, 0x61, 0x77, 0x18, 0x09, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x03, 0x72, 0x61, 0x77, 0x22, 0x4c, 0x0a, 0x10, 0x41, 0x64, 0x64, 0x50, 0x65, 0x72, 0x6d, 0x69,
+	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x12, 0x38, 0x0a, 0x0a, 0x70, 0x65, 0x72, 0x6d,
+	0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x63,
+	0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x50, 0x65, 0x72, 0x6d,
+	0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x0a, 0x70, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69,
+	0x6f, 0x6e, 0x22, 0x4c, 0x0a, 0x10, 0x41, 0x64, 0x64, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73,
+	0x69, 0x6f, 0x6e, 0x52, 0x73, 0x70, 0x12, 0x38, 0x0a, 0x0a, 0x70, 0x65, 0x72, 0x6d, 0x69, 0x73,
+	0x73, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x63, 0x6d, 0x6c,
+	0x74, 0x65, 0x73, 0x74, 0x2e, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73,
+	0x73, 0x69, 0x6f, 0x6e, 0x52, 0x0a, 0x70, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e,
+	0x22, 0x4c, 0x0a, 0x10, 0x53, 0x65, 0x74, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f,
+	0x6e, 0x52, 0x65, 0x71, 0x12, 0x38, 0x0a, 0x0a, 0x70, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69,
+	0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65,
+	0x73, 0x74, 0x2e, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69,
+	0x6f, 0x6e, 0x52, 0x0a, 0x70, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x22, 0x4c,
+	0x0a, 0x10, 0x53, 0x65, 0x74, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52,
+	0x73, 0x70, 0x12, 0x38, 0x0a, 0x0a, 0x70, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74,
+	0x2e, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e,
+	0x52, 0x0a, 0x70, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x22, 0x81, 0x01, 0x0a,
+	0x14, 0x47, 0x65, 0x74, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4c, 0x69,
+	0x73, 0x74, 0x52, 0x65, 0x71, 0x12, 0x31, 0x0a, 0x0b, 0x6c, 0x69, 0x73, 0x74, 0x5f, 0x6f, 0x70,
+	0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x63, 0x6f, 0x72,
+	0x65, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x0a, 0x6c, 0x69,
+	0x73, 0x74, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x36, 0x0a, 0x0a, 0x4c, 0x69, 0x73, 0x74,
+	0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x11, 0x0a, 0x0d, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x70,
+	0x74, 0x69, 0x6f, 0x6e, 0x4e, 0x69, 0x6c, 0x10, 0x00, 0x12, 0x15, 0x0a, 0x11, 0x4c, 0x69, 0x73,
+	0x74, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x70, 0x70, 0x54, 0x79, 0x70, 0x65, 0x10, 0x01,
+	0x22, 0x70, 0x0a, 0x14, 0x47, 0x65, 0x74, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f,
+	0x6e, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x73, 0x70, 0x12, 0x2a, 0x0a, 0x08, 0x70, 0x61, 0x67, 0x69,
+	0x6e, 0x61, 0x74, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x63, 0x6f, 0x72,
+	0x65, 0x2e, 0x50, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x65, 0x52, 0x08, 0x70, 0x61, 0x67, 0x69,
+	0x6e, 0x61, 0x74, 0x65, 0x12, 0x2c, 0x0a, 0x04, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x02, 0x20, 0x03,
+	0x28, 0x0b, 0x32, 0x18, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x4d, 0x6f, 0x64,
+	0x65, 0x6c, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x04, 0x6c, 0x69,
+	0x73, 0x74, 0x22, 0x22, 0x0a, 0x10, 0x44, 0x65, 0x6c, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73,
+	0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x22, 0x12, 0x0a, 0x10, 0x44, 0x65, 0x6c, 0x50, 0x65, 0x72,
+	0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x73, 0x70, 0x22, 0x59, 0x0a, 0x08, 0x52, 0x65,
+	0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x12, 0x23, 0x0a, 0x0d, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72,
+	0x63, 0x65, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x0c, 0x72,
+	0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x28, 0x0a, 0x10, 0x72,
+	0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x5f, 0x69, 0x64, 0x5f, 0x6c, 0x69, 0x73, 0x74, 0x18,
+	0x02, 0x20, 0x03, 0x28, 0x04, 0x52, 0x0e, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x49,
+	0x64, 0x4c, 0x69, 0x73, 0x74, 0x22, 0x87, 0x01, 0x0a, 0x0a, 0x41, 0x64, 0x64, 0x52, 0x6f, 0x6c,
+	0x65, 0x52, 0x65, 0x71, 0x12, 0x26, 0x0a, 0x04, 0x72, 0x6f, 0x6c, 0x65, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x12, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x4d, 0x6f, 0x64,
+	0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x04, 0x72, 0x6f, 0x6c, 0x65, 0x12, 0x19, 0x0a, 0x08,
+	0x75, 0x69, 0x64, 0x5f, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x02, 0x20, 0x03, 0x28, 0x04, 0x52, 0x07,
+	0x75, 0x69, 0x64, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x36, 0x0a, 0x0d, 0x72, 0x65, 0x73, 0x6f, 0x75,
+	0x72, 0x63, 0x65, 0x5f, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x11,
+	0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x52, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63,
+	0x65, 0x52, 0x0c, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x22,
+	0x34, 0x0a, 0x0a, 0x41, 0x64, 0x64, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x73, 0x70, 0x12, 0x26, 0x0a,
+	0x04, 0x72, 0x6f, 0x6c, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x63, 0x6d,
+	0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x52,
+	0x04, 0x72, 0x6f, 0x6c, 0x65, 0x22, 0x8a, 0x01, 0x0a, 0x0d, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65,
+	0x52, 0x6f, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x12, 0x26, 0x0a, 0x04, 0x72, 0x6f, 0x6c, 0x65, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e,
+	0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x04, 0x72, 0x6f, 0x6c, 0x65, 0x12,
+	0x19, 0x0a, 0x08, 0x75, 0x69, 0x64, 0x5f, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x02, 0x20, 0x03, 0x28,
+	0x04, 0x52, 0x07, 0x75, 0x69, 0x64, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x36, 0x0a, 0x0d, 0x72, 0x65,
+	0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x5f, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x03, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x11, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x52, 0x65, 0x73, 0x6f,
+	0x75, 0x72, 0x63, 0x65, 0x52, 0x0c, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x4c, 0x69,
+	0x73, 0x74, 0x22, 0x0f, 0x0a, 0x0d, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x52, 0x6f, 0x6c, 0x65,
+	0x52, 0x73, 0x70, 0x22, 0x1c, 0x0a, 0x0a, 0x44, 0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x65,
+	0x71, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x02, 0x69,
+	0x64, 0x22, 0x0c, 0x0a, 0x0a, 0x44, 0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x73, 0x70, 0x22,
+	0x31, 0x0a, 0x0b, 0x43, 0x6f, 0x70, 0x79, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x12, 0x0e,
+	0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12,
+	0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61,
+	0x6d, 0x65, 0x22, 0x3e, 0x0a, 0x0b, 0x43, 0x6f, 0x70, 0x79, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x73,
+	0x70, 0x12, 0x2f, 0x0a, 0x09, 0x63, 0x6f, 0x70, 0x79, 0x5f, 0x72, 0x6f, 0x6c, 0x65, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x4d,
+	0x6f, 0x64, 0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x08, 0x63, 0x6f, 0x70, 0x79, 0x52, 0x6f,
+	0x6c, 0x65, 0x22, 0x3e, 0x0a, 0x0b, 0x53, 0x6f, 0x72, 0x74, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x65,
+	0x71, 0x12, 0x2f, 0x0a, 0x09, 0x72, 0x6f, 0x6c, 0x65, 0x5f, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x01,
+	0x20, 0x03, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x4d,
+	0x6f, 0x64, 0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x08, 0x72, 0x6f, 0x6c, 0x65, 0x4c, 0x69,
+	0x73, 0x74, 0x22, 0x0d, 0x0a, 0x0b, 0x53, 0x6f, 0x72, 0x74, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x73,
+	0x70, 0x22, 0x78, 0x0a, 0x0e, 0x47, 0x65, 0x74, 0x52, 0x6f, 0x6c, 0x65, 0x4c, 0x69, 0x73, 0x74,
+	0x52, 0x65, 0x71, 0x12, 0x31, 0x0a, 0x0b, 0x6c, 0x69, 0x73, 0x74, 0x5f, 0x6f, 0x70, 0x74, 0x69,
+	0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x63, 0x6f, 0x72, 0x65, 0x2e,
+	0x4c, 0x69, 0x73, 0x74, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x0a, 0x6c, 0x69, 0x73, 0x74,
+	0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x33, 0x0a, 0x0a, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x70,
+	0x74, 0x69, 0x6f, 0x6e, 0x12, 0x11, 0x0a, 0x0d, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x70, 0x74, 0x69,
+	0x6f, 0x6e, 0x4e, 0x69, 0x6c, 0x10, 0x00, 0x12, 0x12, 0x0a, 0x0e, 0x4c, 0x69, 0x73, 0x74, 0x4f,
+	0x70, 0x74, 0x69, 0x6f, 0x6e, 0x4e, 0x61, 0x6d, 0x65, 0x10, 0x01, 0x22, 0x64, 0x0a, 0x0e, 0x47,
+	0x65, 0x74, 0x52, 0x6f, 0x6c, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x73, 0x70, 0x12, 0x2a, 0x0a,
+	0x08, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x0e, 0x2e, 0x63, 0x6f, 0x72, 0x65, 0x2e, 0x50, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x65, 0x52,
+	0x08, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x65, 0x12, 0x26, 0x0a, 0x04, 0x6c, 0x69, 0x73,
+	0x74, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73,
+	0x74, 0x2e, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x04, 0x6c, 0x69, 0x73,
+	0x74, 0x22, 0xb4, 0x01, 0x0a, 0x15, 0x47, 0x65, 0x74, 0x55, 0x73, 0x65, 0x72, 0x52, 0x6f, 0x6c,
+	0x65, 0x4c, 0x69, 0x73, 0x74, 0x53, 0x79, 0x73, 0x52, 0x65, 0x71, 0x12, 0x31, 0x0a, 0x0b, 0x6c,
+	0x69, 0x73, 0x74, 0x5f, 0x6f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x10, 0x2e, 0x63, 0x6f, 0x72, 0x65, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x70, 0x74, 0x69,
+	0x6f, 0x6e, 0x52, 0x0a, 0x6c, 0x69, 0x73, 0x74, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x17,
+	0x0a, 0x07, 0x63, 0x6f, 0x72, 0x70, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0d, 0x52,
+	0x06, 0x63, 0x6f, 0x72, 0x70, 0x49, 0x64, 0x12, 0x17, 0x0a, 0x07, 0x61, 0x70, 0x70, 0x70, 0x5f,
+	0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x06, 0x61, 0x70, 0x70, 0x70, 0x49, 0x64,
+	0x22, 0x36, 0x0a, 0x0a, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x11,
+	0x0a, 0x0d, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x4e, 0x69, 0x6c, 0x10,
+	0x00, 0x12, 0x15, 0x0a, 0x11, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x55,
+	0x69, 0x64, 0x4c, 0x69, 0x73, 0x74, 0x10, 0x01, 0x22, 0x6f, 0x0a, 0x15, 0x47, 0x65, 0x74, 0x55,
+	0x73, 0x65, 0x72, 0x52, 0x6f, 0x6c, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x53, 0x79, 0x73, 0x52, 0x73,
+	0x70, 0x12, 0x2a, 0x0a, 0x08, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x65, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x63, 0x6f, 0x72, 0x65, 0x2e, 0x50, 0x61, 0x67, 0x69, 0x6e,
+	0x61, 0x74, 0x65, 0x52, 0x08, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x65, 0x12, 0x2a, 0x0a,
+	0x04, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x63, 0x6d,
+	0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x55, 0x73, 0x65, 0x72, 0x52,
+	0x6f, 0x6c, 0x65, 0x52, 0x04, 0x6c, 0x69, 0x73, 0x74, 0x2a, 0x84, 0x01, 0x0a, 0x07, 0x45, 0x72,
+	0x72, 0x43, 0x6f, 0x64, 0x65, 0x12, 0x0b, 0x0a, 0x07, 0x53, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73,
+	0x10, 0x00, 0x12, 0x1b, 0x0a, 0x15, 0x45, 0x72, 0x72, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73,
+	0x69, 0x6f, 0x6e, 0x4e, 0x6f, 0x74, 0x46, 0x6f, 0x75, 0x6e, 0x64, 0x10, 0xf9, 0x96, 0x15, 0x12,
+	0x15, 0x0a, 0x0f, 0x45, 0x72, 0x72, 0x52, 0x6f, 0x6c, 0x65, 0x4e, 0x6f, 0x74, 0x46, 0x6f, 0x75,
+	0x6e, 0x64, 0x10, 0xfa, 0x96, 0x15, 0x12, 0x19, 0x0a, 0x13, 0x45, 0x72, 0x72, 0x55, 0x73, 0x65,
+	0x72, 0x52, 0x6f, 0x6c, 0x65, 0x4e, 0x6f, 0x74, 0x46, 0x6f, 0x75, 0x6e, 0x64, 0x10, 0xfb, 0x96,
+	0x15, 0x12, 0x1d, 0x0a, 0x17, 0x45, 0x72, 0x72, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x6f,
+	0x75, 0x72, 0x63, 0x65, 0x4e, 0x6f, 0x74, 0x46, 0x6f, 0x75, 0x6e, 0x64, 0x10, 0xfc, 0x96, 0x15,
+	0x2a, 0xad, 0x01, 0x0a, 0x07, 0x41, 0x70, 0x70, 0x54, 0x79, 0x70, 0x65, 0x12, 0x0a, 0x0a, 0x06,
+	0x41, 0x70, 0x70, 0x4e, 0x69, 0x6c, 0x10, 0x00, 0x12, 0x0c, 0x0a, 0x08, 0x41, 0x70, 0x70, 0x42,
+	0x69, 0x4c, 0x69, 0x6e, 0x10, 0x01, 0x12, 0x0d, 0x0a, 0x09, 0x41, 0x70, 0x70, 0x51, 0x52, 0x6f,
+	0x62, 0x6f, 0x74, 0x10, 0x02, 0x12, 0x0d, 0x0a, 0x09, 0x41, 0x70, 0x70, 0x51, 0x4f, 0x72, 0x64,
+	0x65, 0x72, 0x10, 0x03, 0x12, 0x0d, 0x0a, 0x09, 0x41, 0x70, 0x70, 0x51, 0x57, 0x68, 0x61, 0x6c,
+	0x65, 0x10, 0x04, 0x12, 0x0a, 0x0a, 0x06, 0x41, 0x70, 0x70, 0x51, 0x54, 0x6b, 0x10, 0x05, 0x12,
+	0x10, 0x0a, 0x0c, 0x41, 0x70, 0x70, 0x51, 0x41, 0x49, 0x43, 0x61, 0x6c, 0x6c, 0x65, 0x72, 0x10,
+	0x06, 0x12, 0x10, 0x0a, 0x0c, 0x41, 0x70, 0x70, 0x52, 0x65, 0x64, 0x50, 0x61, 0x63, 0x6b, 0x65,
+	0x74, 0x10, 0x07, 0x12, 0x12, 0x0a, 0x0e, 0x41, 0x70, 0x70, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x43,
+	0x72, 0x65, 0x64, 0x69, 0x74, 0x10, 0x08, 0x12, 0x0a, 0x0a, 0x06, 0x41, 0x70, 0x70, 0x4a, 0x51,
+	0x54, 0x10, 0x09, 0x12, 0x0b, 0x0a, 0x07, 0x41, 0x70, 0x70, 0x51, 0x4d, 0x73, 0x67, 0x10, 0x0a,
+	0x2a, 0x58, 0x0a, 0x0c, 0x52, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x54, 0x79, 0x70, 0x65,
+	0x12, 0x13, 0x0a, 0x0f, 0x52, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x54, 0x79, 0x70, 0x65,
+	0x4e, 0x69, 0x6c, 0x10, 0x00, 0x12, 0x16, 0x0a, 0x12, 0x52, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63,
+	0x65, 0x54, 0x79, 0x70, 0x65, 0x51, 0x72, 0x6f, 0x62, 0x6f, 0x74, 0x10, 0x01, 0x12, 0x1b, 0x0a,
+	0x17, 0x52, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x54, 0x79, 0x70, 0x65, 0x48, 0x6f, 0x73,
+	0x74, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x10, 0x02, 0x32, 0x94, 0x06, 0x0a, 0x07, 0x63,
+	0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x12, 0x51, 0x0a, 0x0d, 0x41, 0x64, 0x64, 0x50, 0x65, 0x72,
 	0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x19, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73,
 	0x74, 0x2e, 0x41, 0x64, 0x64, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52,
 	0x65, 0x71, 0x1a, 0x19, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x41, 0x64, 0x64,
@@ -2528,8 +2386,36 @@ var file_cmltest_proto_rawDesc = []byte{
 	0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x1a, 0x19, 0x2e,
 	0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x44, 0x65, 0x6c, 0x50, 0x65, 0x72, 0x6d, 0x69,
 	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x73, 0x70, 0x22, 0x0a, 0x9a, 0xc8, 0xd0, 0x07, 0x05, 0x73,
-	0x74, 0x61, 0x66, 0x66, 0x42, 0x0d, 0x5a, 0x0b, 0x73, 0x72, 0x63, 0x2f, 0x63, 0x6d, 0x6c, 0x74,
-	0x65, 0x73, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x74, 0x61, 0x66, 0x66, 0x12, 0x35, 0x0a, 0x07, 0x41, 0x64, 0x64, 0x52, 0x6f, 0x6c, 0x65, 0x12,
+	0x13, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x41, 0x64, 0x64, 0x52, 0x6f, 0x6c,
+	0x65, 0x52, 0x65, 0x71, 0x1a, 0x13, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x41,
+	0x64, 0x64, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x73, 0x70, 0x22, 0x00, 0x12, 0x3e, 0x0a, 0x0a, 0x55,
+	0x70, 0x64, 0x61, 0x74, 0x65, 0x52, 0x6f, 0x6c, 0x65, 0x12, 0x16, 0x2e, 0x63, 0x6d, 0x6c, 0x74,
+	0x65, 0x73, 0x74, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x65,
+	0x71, 0x1a, 0x16, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x55, 0x70, 0x64, 0x61,
+	0x74, 0x65, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x73, 0x70, 0x22, 0x00, 0x12, 0x35, 0x0a, 0x07, 0x44,
+	0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x12, 0x13, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74,
+	0x2e, 0x44, 0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x13, 0x2e, 0x63, 0x6d,
+	0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x44, 0x65, 0x6c, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x73, 0x70,
+	0x22, 0x00, 0x12, 0x38, 0x0a, 0x08, 0x43, 0x6f, 0x70, 0x79, 0x52, 0x6f, 0x6c, 0x65, 0x12, 0x14,
+	0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x43, 0x6f, 0x70, 0x79, 0x52, 0x6f, 0x6c,
+	0x65, 0x52, 0x65, 0x71, 0x1a, 0x14, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x43,
+	0x6f, 0x70, 0x79, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x73, 0x70, 0x22, 0x00, 0x12, 0x38, 0x0a, 0x08,
+	0x53, 0x6f, 0x72, 0x74, 0x52, 0x6f, 0x6c, 0x65, 0x12, 0x14, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65,
+	0x73, 0x74, 0x2e, 0x53, 0x6f, 0x72, 0x74, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x14,
+	0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x53, 0x6f, 0x72, 0x74, 0x52, 0x6f, 0x6c,
+	0x65, 0x52, 0x73, 0x70, 0x22, 0x00, 0x12, 0x41, 0x0a, 0x0b, 0x47, 0x65, 0x74, 0x52, 0x6f, 0x6c,
+	0x65, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x17, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e,
+	0x47, 0x65, 0x74, 0x52, 0x6f, 0x6c, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x1a, 0x17,
+	0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x47, 0x65, 0x74, 0x52, 0x6f, 0x6c, 0x65,
+	0x4c, 0x69, 0x73, 0x74, 0x52, 0x73, 0x70, 0x22, 0x00, 0x12, 0x56, 0x0a, 0x12, 0x47, 0x65, 0x74,
+	0x55, 0x73, 0x65, 0x72, 0x52, 0x6f, 0x6c, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x53, 0x79, 0x73, 0x12,
+	0x1e, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x47, 0x65, 0x74, 0x55, 0x73, 0x65,
+	0x72, 0x52, 0x6f, 0x6c, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x53, 0x79, 0x73, 0x52, 0x65, 0x71, 0x1a,
+	0x1e, 0x2e, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x47, 0x65, 0x74, 0x55, 0x73, 0x65,
+	0x72, 0x52, 0x6f, 0x6c, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x53, 0x79, 0x73, 0x52, 0x73, 0x70, 0x22,
+	0x00, 0x42, 0x0d, 0x5a, 0x0b, 0x73, 0x72, 0x63, 0x2f, 0x63, 0x6d, 0x6c, 0x74, 0x65, 0x73, 0x74,
+	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -2544,111 +2430,100 @@ func file_cmltest_proto_rawDescGZIP() []byte {
 	return file_cmltest_proto_rawDescData
 }
 
-var file_cmltest_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_cmltest_proto_msgTypes = make([]protoimpl.MessageInfo, 36)
+var file_cmltest_proto_enumTypes = make([]protoimpl.EnumInfo, 7)
+var file_cmltest_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
 var file_cmltest_proto_goTypes = []interface{}{
-	(GetRoleListReq_ListOption)(0),              // 0: cmltest.GetRoleListReq.ListOption
-	(GetPermissionListReq_ListOption)(0),        // 1: cmltest.GetPermissionListReq.ListOption
-	(ModelRole_RoleType)(0),                     // 2: cmltest.ModelRole.RoleType
-	(ModelRole_DataScope_Scope)(0),              // 3: cmltest.ModelRole.DataScope.Scope
-	(*AddRoleReq)(nil),                          // 4: cmltest.AddRoleReq
-	(*AddRoleRsp)(nil),                          // 5: cmltest.AddRoleRsp
-	(*UpdateRoleReq)(nil),                       // 6: cmltest.UpdateRoleReq
-	(*UpdateRoleRsp)(nil),                       // 7: cmltest.UpdateRoleRsp
-	(*DelRoleReq)(nil),                          // 8: cmltest.DelRoleReq
-	(*DelRoleRsp)(nil),                          // 9: cmltest.DelRoleRsp
-	(*CopyRoleReq)(nil),                         // 10: cmltest.CopyRoleReq
-	(*CopyRoleRsp)(nil),                         // 11: cmltest.CopyRoleRsp
-	(*SortRoleReq)(nil),                         // 12: cmltest.SortRoleReq
-	(*SortRoleRsp)(nil),                         // 13: cmltest.SortRoleRsp
-	(*GetRoleListReq)(nil),                      // 14: cmltest.GetRoleListReq
-	(*GetRoleListRsp)(nil),                      // 15: cmltest.GetRoleListRsp
-	(*SetRoleStaffReq)(nil),                     // 16: cmltest.SetRoleStaffReq
-	(*SetRoleStaffRsp)(nil),                     // 17: cmltest.SetRoleStaffRsp
-	(*GetDefaultRoleListReq)(nil),               // 18: cmltest.GetDefaultRoleListReq
-	(*GetDefaultRoleListRsp)(nil),               // 19: cmltest.GetDefaultRoleListRsp
-	(*GetPermissionReq)(nil),                    // 20: cmltest.GetPermissionReq
-	(*GetPermissionRsp)(nil),                    // 21: cmltest.GetPermissionRsp
-	(*AddPermissionReq)(nil),                    // 22: cmltest.AddPermissionReq
-	(*AddPermissionRsp)(nil),                    // 23: cmltest.AddPermissionRsp
-	(*SetPermissionReq)(nil),                    // 24: cmltest.SetPermissionReq
-	(*SetPermissionRsp)(nil),                    // 25: cmltest.SetPermissionRsp
-	(*GetPermissionListReq)(nil),                // 26: cmltest.GetPermissionListReq
-	(*GetPermissionListRsp)(nil),                // 27: cmltest.GetPermissionListRsp
-	(*DelPermissionReq)(nil),                    // 28: cmltest.DelPermissionReq
-	(*DelPermissionRsp)(nil),                    // 29: cmltest.DelPermissionRsp
-	(*ModelRole)(nil),                           // 30: cmltest.ModelRole
-	(*ModelUserRole)(nil),                       // 31: cmltest.ModelUserRole
-	(*ModelPermission)(nil),                     // 32: cmltest.ModelPermission
-	(*ModelMenu)(nil),                           // 33: cmltest.ModelMenu
-	(*ModelRole_Detail)(nil),                    // 34: cmltest.ModelRole.Detail
-	(*ModelRole_DataScope)(nil),                 // 35: cmltest.ModelRole.DataScope
-	(*ModelRole_Permission)(nil),                // 36: cmltest.ModelRole.Permission
-	(*ModelRole_Permission_PermissionList)(nil), // 37: cmltest.ModelRole.Permission.PermissionList
-	nil,                            // 38: cmltest.ModelRole.Permission.PermissionMapEntry
-	(*ModelPermission_Detail)(nil), // 39: cmltest.ModelPermission.Detail
-	(*core.ListOption)(nil),        // 40: core.ListOption
-	(*core.Paginate)(nil),          // 41: core.Paginate
-	(*quan.UserUnit)(nil),          // 42: quan.UserUnit
+	(ErrCode)(0),                                // 0: cmltest.ErrCode
+	(AppType)(0),                                // 1: cmltest.AppType
+	(ResourceType)(0),                           // 2: cmltest.ResourceType
+	(ModelRole_RoleType)(0),                     // 3: cmltest.ModelRole.RoleType
+	(GetPermissionListReq_ListOption)(0),        // 4: cmltest.GetPermissionListReq.ListOption
+	(GetRoleListReq_ListOption)(0),              // 5: cmltest.GetRoleListReq.ListOption
+	(GetUserRoleListSysReq_ListOption)(0),       // 6: cmltest.GetUserRoleListSysReq.ListOption
+	(*ModelRole)(nil),                           // 7: cmltest.ModelRole
+	(*ModelUserRole)(nil),                       // 8: cmltest.ModelUserRole
+	(*ModelRoleResource)(nil),                   // 9: cmltest.ModelRoleResource
+	(*ModelPermission)(nil),                     // 10: cmltest.ModelPermission
+	(*AddPermissionReq)(nil),                    // 11: cmltest.AddPermissionReq
+	(*AddPermissionRsp)(nil),                    // 12: cmltest.AddPermissionRsp
+	(*SetPermissionReq)(nil),                    // 13: cmltest.SetPermissionReq
+	(*SetPermissionRsp)(nil),                    // 14: cmltest.SetPermissionRsp
+	(*GetPermissionListReq)(nil),                // 15: cmltest.GetPermissionListReq
+	(*GetPermissionListRsp)(nil),                // 16: cmltest.GetPermissionListRsp
+	(*DelPermissionReq)(nil),                    // 17: cmltest.DelPermissionReq
+	(*DelPermissionRsp)(nil),                    // 18: cmltest.DelPermissionRsp
+	(*Resource)(nil),                            // 19: cmltest.Resource
+	(*AddRoleReq)(nil),                          // 20: cmltest.AddRoleReq
+	(*AddRoleRsp)(nil),                          // 21: cmltest.AddRoleRsp
+	(*UpdateRoleReq)(nil),                       // 22: cmltest.UpdateRoleReq
+	(*UpdateRoleRsp)(nil),                       // 23: cmltest.UpdateRoleRsp
+	(*DelRoleReq)(nil),                          // 24: cmltest.DelRoleReq
+	(*DelRoleRsp)(nil),                          // 25: cmltest.DelRoleRsp
+	(*CopyRoleReq)(nil),                         // 26: cmltest.CopyRoleReq
+	(*CopyRoleRsp)(nil),                         // 27: cmltest.CopyRoleRsp
+	(*SortRoleReq)(nil),                         // 28: cmltest.SortRoleReq
+	(*SortRoleRsp)(nil),                         // 29: cmltest.SortRoleRsp
+	(*GetRoleListReq)(nil),                      // 30: cmltest.GetRoleListReq
+	(*GetRoleListRsp)(nil),                      // 31: cmltest.GetRoleListRsp
+	(*GetUserRoleListSysReq)(nil),               // 32: cmltest.GetUserRoleListSysReq
+	(*GetUserRoleListSysRsp)(nil),               // 33: cmltest.GetUserRoleListSysRsp
+	(*ModelRole_Permission)(nil),                // 34: cmltest.ModelRole.Permission
+	(*ModelRole_Permission_PermissionList)(nil), // 35: cmltest.ModelRole.Permission.PermissionList
+	nil,                     // 36: cmltest.ModelRole.Permission.PermissionMapEntry
+	(*core.ListOption)(nil), // 37: core.ListOption
+	(*core.Paginate)(nil),   // 38: core.Paginate
 }
 var file_cmltest_proto_depIdxs = []int32{
-	30, // 0: cmltest.AddRoleReq.role:type_name -> cmltest.ModelRole
-	30, // 1: cmltest.AddRoleRsp.role:type_name -> cmltest.ModelRole
-	30, // 2: cmltest.UpdateRoleReq.role:type_name -> cmltest.ModelRole
-	30, // 3: cmltest.CopyRoleRsp.copy_role:type_name -> cmltest.ModelRole
-	30, // 4: cmltest.SortRoleReq.role_list:type_name -> cmltest.ModelRole
-	40, // 5: cmltest.GetRoleListReq.list_option:type_name -> core.ListOption
-	41, // 6: cmltest.GetRoleListRsp.paginate:type_name -> core.Paginate
-	30, // 7: cmltest.GetRoleListRsp.list:type_name -> cmltest.ModelRole
-	30, // 8: cmltest.SetRoleStaffReq.role:type_name -> cmltest.ModelRole
-	30, // 9: cmltest.GetDefaultRoleListRsp.role_list:type_name -> cmltest.ModelRole
-	32, // 10: cmltest.GetPermissionRsp.permission_list:type_name -> cmltest.ModelPermission
-	32, // 11: cmltest.AddPermissionReq.permission:type_name -> cmltest.ModelPermission
-	32, // 12: cmltest.AddPermissionRsp.permission:type_name -> cmltest.ModelPermission
-	32, // 13: cmltest.SetPermissionReq.permission:type_name -> cmltest.ModelPermission
-	32, // 14: cmltest.SetPermissionRsp.permission:type_name -> cmltest.ModelPermission
-	40, // 15: cmltest.GetPermissionListReq.list_option:type_name -> core.ListOption
-	41, // 16: cmltest.GetPermissionListRsp.paginate:type_name -> core.Paginate
-	32, // 17: cmltest.GetPermissionListRsp.list:type_name -> cmltest.ModelPermission
-	34, // 18: cmltest.ModelRole.detail:type_name -> cmltest.ModelRole.Detail
-	36, // 19: cmltest.ModelRole.permission:type_name -> cmltest.ModelRole.Permission
-	39, // 20: cmltest.ModelPermission.detail:type_name -> cmltest.ModelPermission.Detail
-	42, // 21: cmltest.ModelRole.Detail.user_list:type_name -> quan.UserUnit
-	42, // 22: cmltest.ModelRole.Detail.robot_list:type_name -> quan.UserUnit
-	38, // 23: cmltest.ModelRole.Permission.permission_map:type_name -> cmltest.ModelRole.Permission.PermissionMapEntry
-	35, // 24: cmltest.ModelRole.Permission.PermissionList.data_scope:type_name -> cmltest.ModelRole.DataScope
-	37, // 25: cmltest.ModelRole.Permission.PermissionMapEntry.value:type_name -> cmltest.ModelRole.Permission.PermissionList
-	4,  // 26: cmltest.cmltest.AddRole:input_type -> cmltest.AddRoleReq
-	6,  // 27: cmltest.cmltest.UpdateRole:input_type -> cmltest.UpdateRoleReq
-	8,  // 28: cmltest.cmltest.DelRole:input_type -> cmltest.DelRoleReq
-	10, // 29: cmltest.cmltest.CopyRole:input_type -> cmltest.CopyRoleReq
-	12, // 30: cmltest.cmltest.SortRole:input_type -> cmltest.SortRoleReq
-	14, // 31: cmltest.cmltest.GetRoleList:input_type -> cmltest.GetRoleListReq
-	16, // 32: cmltest.cmltest.SetRoleStaff:input_type -> cmltest.SetRoleStaffReq
-	18, // 33: cmltest.cmltest.GetDefaultRoleList:input_type -> cmltest.GetDefaultRoleListReq
-	20, // 34: cmltest.cmltest.GetPermission:input_type -> cmltest.GetPermissionReq
-	22, // 35: cmltest.cmltest.AddPermission:input_type -> cmltest.AddPermissionReq
-	24, // 36: cmltest.cmltest.SetPermission:input_type -> cmltest.SetPermissionReq
-	26, // 37: cmltest.cmltest.GetPermissionList:input_type -> cmltest.GetPermissionListReq
-	28, // 38: cmltest.cmltest.DelPermission:input_type -> cmltest.DelPermissionReq
-	5,  // 39: cmltest.cmltest.AddRole:output_type -> cmltest.AddRoleRsp
-	7,  // 40: cmltest.cmltest.UpdateRole:output_type -> cmltest.UpdateRoleRsp
-	9,  // 41: cmltest.cmltest.DelRole:output_type -> cmltest.DelRoleRsp
-	11, // 42: cmltest.cmltest.CopyRole:output_type -> cmltest.CopyRoleRsp
-	13, // 43: cmltest.cmltest.SortRole:output_type -> cmltest.SortRoleRsp
-	15, // 44: cmltest.cmltest.GetRoleList:output_type -> cmltest.GetRoleListRsp
-	17, // 45: cmltest.cmltest.SetRoleStaff:output_type -> cmltest.SetRoleStaffRsp
-	19, // 46: cmltest.cmltest.GetDefaultRoleList:output_type -> cmltest.GetDefaultRoleListRsp
-	21, // 47: cmltest.cmltest.GetPermission:output_type -> cmltest.GetPermissionRsp
-	23, // 48: cmltest.cmltest.AddPermission:output_type -> cmltest.AddPermissionRsp
-	25, // 49: cmltest.cmltest.SetPermission:output_type -> cmltest.SetPermissionRsp
-	27, // 50: cmltest.cmltest.GetPermissionList:output_type -> cmltest.GetPermissionListRsp
-	29, // 51: cmltest.cmltest.DelPermission:output_type -> cmltest.DelPermissionRsp
-	39, // [39:52] is the sub-list for method output_type
-	26, // [26:39] is the sub-list for method input_type
-	26, // [26:26] is the sub-list for extension type_name
-	26, // [26:26] is the sub-list for extension extendee
-	0,  // [0:26] is the sub-list for field type_name
+	34, // 0: cmltest.ModelRole.permission:type_name -> cmltest.ModelRole.Permission
+	10, // 1: cmltest.AddPermissionReq.permission:type_name -> cmltest.ModelPermission
+	10, // 2: cmltest.AddPermissionRsp.permission:type_name -> cmltest.ModelPermission
+	10, // 3: cmltest.SetPermissionReq.permission:type_name -> cmltest.ModelPermission
+	10, // 4: cmltest.SetPermissionRsp.permission:type_name -> cmltest.ModelPermission
+	37, // 5: cmltest.GetPermissionListReq.list_option:type_name -> core.ListOption
+	38, // 6: cmltest.GetPermissionListRsp.paginate:type_name -> core.Paginate
+	10, // 7: cmltest.GetPermissionListRsp.list:type_name -> cmltest.ModelPermission
+	7,  // 8: cmltest.AddRoleReq.role:type_name -> cmltest.ModelRole
+	19, // 9: cmltest.AddRoleReq.resource_list:type_name -> cmltest.Resource
+	7,  // 10: cmltest.AddRoleRsp.role:type_name -> cmltest.ModelRole
+	7,  // 11: cmltest.UpdateRoleReq.role:type_name -> cmltest.ModelRole
+	19, // 12: cmltest.UpdateRoleReq.resource_list:type_name -> cmltest.Resource
+	7,  // 13: cmltest.CopyRoleRsp.copy_role:type_name -> cmltest.ModelRole
+	7,  // 14: cmltest.SortRoleReq.role_list:type_name -> cmltest.ModelRole
+	37, // 15: cmltest.GetRoleListReq.list_option:type_name -> core.ListOption
+	38, // 16: cmltest.GetRoleListRsp.paginate:type_name -> core.Paginate
+	7,  // 17: cmltest.GetRoleListRsp.list:type_name -> cmltest.ModelRole
+	37, // 18: cmltest.GetUserRoleListSysReq.list_option:type_name -> core.ListOption
+	38, // 19: cmltest.GetUserRoleListSysRsp.paginate:type_name -> core.Paginate
+	8,  // 20: cmltest.GetUserRoleListSysRsp.list:type_name -> cmltest.ModelUserRole
+	36, // 21: cmltest.ModelRole.Permission.permission_map:type_name -> cmltest.ModelRole.Permission.PermissionMapEntry
+	35, // 22: cmltest.ModelRole.Permission.PermissionMapEntry.value:type_name -> cmltest.ModelRole.Permission.PermissionList
+	11, // 23: cmltest.cmltest.AddPermission:input_type -> cmltest.AddPermissionReq
+	13, // 24: cmltest.cmltest.SetPermission:input_type -> cmltest.SetPermissionReq
+	15, // 25: cmltest.cmltest.GetPermissionList:input_type -> cmltest.GetPermissionListReq
+	17, // 26: cmltest.cmltest.DelPermission:input_type -> cmltest.DelPermissionReq
+	20, // 27: cmltest.cmltest.AddRole:input_type -> cmltest.AddRoleReq
+	22, // 28: cmltest.cmltest.UpdateRole:input_type -> cmltest.UpdateRoleReq
+	24, // 29: cmltest.cmltest.DelRole:input_type -> cmltest.DelRoleReq
+	26, // 30: cmltest.cmltest.CopyRole:input_type -> cmltest.CopyRoleReq
+	28, // 31: cmltest.cmltest.SortRole:input_type -> cmltest.SortRoleReq
+	30, // 32: cmltest.cmltest.GetRoleList:input_type -> cmltest.GetRoleListReq
+	32, // 33: cmltest.cmltest.GetUserRoleListSys:input_type -> cmltest.GetUserRoleListSysReq
+	12, // 34: cmltest.cmltest.AddPermission:output_type -> cmltest.AddPermissionRsp
+	14, // 35: cmltest.cmltest.SetPermission:output_type -> cmltest.SetPermissionRsp
+	16, // 36: cmltest.cmltest.GetPermissionList:output_type -> cmltest.GetPermissionListRsp
+	18, // 37: cmltest.cmltest.DelPermission:output_type -> cmltest.DelPermissionRsp
+	21, // 38: cmltest.cmltest.AddRole:output_type -> cmltest.AddRoleRsp
+	23, // 39: cmltest.cmltest.UpdateRole:output_type -> cmltest.UpdateRoleRsp
+	25, // 40: cmltest.cmltest.DelRole:output_type -> cmltest.DelRoleRsp
+	27, // 41: cmltest.cmltest.CopyRole:output_type -> cmltest.CopyRoleRsp
+	29, // 42: cmltest.cmltest.SortRole:output_type -> cmltest.SortRoleRsp
+	31, // 43: cmltest.cmltest.GetRoleList:output_type -> cmltest.GetRoleListRsp
+	33, // 44: cmltest.cmltest.GetUserRoleListSys:output_type -> cmltest.GetUserRoleListSysRsp
+	34, // [34:45] is the sub-list for method output_type
+	23, // [23:34] is the sub-list for method input_type
+	23, // [23:23] is the sub-list for extension type_name
+	23, // [23:23] is the sub-list for extension extendee
+	0,  // [0:23] is the sub-list for field type_name
 }
 
 func init() { file_cmltest_proto_init() }
@@ -2658,318 +2533,6 @@ func file_cmltest_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_cmltest_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AddRoleReq); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cmltest_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AddRoleRsp); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cmltest_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdateRoleReq); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cmltest_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdateRoleRsp); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cmltest_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DelRoleReq); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cmltest_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DelRoleRsp); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cmltest_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CopyRoleReq); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cmltest_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CopyRoleRsp); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cmltest_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SortRoleReq); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cmltest_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SortRoleRsp); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cmltest_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetRoleListReq); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cmltest_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetRoleListRsp); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cmltest_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SetRoleStaffReq); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cmltest_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SetRoleStaffRsp); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cmltest_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetDefaultRoleListReq); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cmltest_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetDefaultRoleListRsp); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cmltest_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetPermissionReq); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cmltest_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetPermissionRsp); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cmltest_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AddPermissionReq); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cmltest_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AddPermissionRsp); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cmltest_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SetPermissionReq); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cmltest_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SetPermissionRsp); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cmltest_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetPermissionListReq); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cmltest_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetPermissionListRsp); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cmltest_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DelPermissionReq); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cmltest_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DelPermissionRsp); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cmltest_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ModelRole); i {
 			case 0:
 				return &v.state
@@ -2981,7 +2544,7 @@ func file_cmltest_proto_init() {
 				return nil
 			}
 		}
-		file_cmltest_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
+		file_cmltest_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ModelUserRole); i {
 			case 0:
 				return &v.state
@@ -2993,7 +2556,19 @@ func file_cmltest_proto_init() {
 				return nil
 			}
 		}
-		file_cmltest_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
+		file_cmltest_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ModelRoleResource); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cmltest_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ModelPermission); i {
 			case 0:
 				return &v.state
@@ -3005,8 +2580,8 @@ func file_cmltest_proto_init() {
 				return nil
 			}
 		}
-		file_cmltest_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ModelMenu); i {
+		file_cmltest_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AddPermissionReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3017,8 +2592,8 @@ func file_cmltest_proto_init() {
 				return nil
 			}
 		}
-		file_cmltest_proto_msgTypes[30].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ModelRole_Detail); i {
+		file_cmltest_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AddPermissionRsp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3029,8 +2604,8 @@ func file_cmltest_proto_init() {
 				return nil
 			}
 		}
-		file_cmltest_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ModelRole_DataScope); i {
+		file_cmltest_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SetPermissionReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3041,7 +2616,247 @@ func file_cmltest_proto_init() {
 				return nil
 			}
 		}
-		file_cmltest_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
+		file_cmltest_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SetPermissionRsp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cmltest_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetPermissionListReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cmltest_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetPermissionListRsp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cmltest_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DelPermissionReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cmltest_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DelPermissionRsp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cmltest_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Resource); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cmltest_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AddRoleReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cmltest_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AddRoleRsp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cmltest_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateRoleReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cmltest_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateRoleRsp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cmltest_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DelRoleReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cmltest_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DelRoleRsp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cmltest_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CopyRoleReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cmltest_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CopyRoleRsp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cmltest_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SortRoleReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cmltest_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SortRoleRsp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cmltest_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetRoleListReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cmltest_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetRoleListRsp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cmltest_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetUserRoleListSysReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cmltest_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetUserRoleListSysRsp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cmltest_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ModelRole_Permission); i {
 			case 0:
 				return &v.state
@@ -3053,20 +2868,8 @@ func file_cmltest_proto_init() {
 				return nil
 			}
 		}
-		file_cmltest_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
+		file_cmltest_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ModelRole_Permission_PermissionList); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cmltest_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ModelPermission_Detail); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3083,8 +2886,8 @@ func file_cmltest_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_cmltest_proto_rawDesc,
-			NumEnums:      4,
-			NumMessages:   36,
+			NumEnums:      7,
+			NumMessages:   30,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

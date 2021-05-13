@@ -8,8 +8,8 @@ import (
 	"git.pinquest.cn/qlb/brick/dbproxy"
 )
 
-var ModelRole = &dbproxy.ModelObjectType{
-	Name: "cmltest.ModelRole",
+var ModelRoleResource = &dbproxy.ModelObjectType{
+	Name: "cmltest.ModelRoleResource",
 	PrimaryKey: "id",
 	PrimaryKeyType: "uint64",
 	FieldList: &dbproxy.ObjectFieldList{
@@ -93,8 +93,8 @@ var ModelRole = &dbproxy.ModelObjectType{
 				IsArray:   false,
 			},
 			{
-				FieldName: "app_type",
-				Type:      "uint32",
+				FieldName: "role_id",
+				Type:      "uint64",
 				RefType:   "",
 				FormName:  "",
 				FormType:  "",
@@ -106,9 +106,9 @@ var ModelRole = &dbproxy.ModelObjectType{
 				IsArray:   false,
 			},
 			{
-				FieldName: "role_type",
+				FieldName: "resource_type",
 				Type:      "uint32",
-				RefType:   "cmltest.ModelRole.RoleType",
+				RefType:   "cmltest.ResourceType",
 				FormName:  "",
 				FormType:  "",
 				Validate:  "",
@@ -119,39 +119,13 @@ var ModelRole = &dbproxy.ModelObjectType{
 				IsArray:   false,
 			},
 			{
-				FieldName: "name",
-				Type:      "string",
-				RefType:   "",
-				FormName:  "",
-				FormType:  "",
-				Validate:  "max=30",
-				DbDef:     "type:varchar(30)",
-				ScopeCond: "",
-				LinkTo:    "",
-				Editable:  true,
-				IsArray:   false,
-			},
-			{
-				FieldName: "view_order",
-				Type:      "uint32",
+				FieldName: "resource_id",
+				Type:      "uint64",
 				RefType:   "",
 				FormName:  "",
 				FormType:  "",
 				Validate:  "",
 				DbDef:     "",
-				ScopeCond: "",
-				LinkTo:    "",
-				Editable:  true,
-				IsArray:   false,
-			},
-			{
-				FieldName: "permission",
-				Type:      "object",
-				RefType:   "cmltest.ModelRole.Permission",
-				FormName:  "",
-				FormType:  "",
-				Validate:  "",
-				DbDef:     "type: text",
 				ScopeCond: "",
 				LinkTo:    "",
 				Editable:  true,
@@ -162,95 +136,81 @@ var ModelRole = &dbproxy.ModelObjectType{
 }
 
 func init() {
-	ObjectTypeList = append(ObjectTypeList, ModelRole)
+	ObjectTypeList = append(ObjectTypeList, ModelRoleResource)
 }
 
-var IdModelRole = &dbproxy.StructField{
+var IdModelRoleResource = &dbproxy.StructField{
 	StructFieldName: "Id",
 	DbFieldName:     "id",
 }
 
-var CreatedAtModelRole = &dbproxy.StructField{
+var CreatedAtModelRoleResource = &dbproxy.StructField{
 	StructFieldName: "CreatedAt",
 	DbFieldName:     "created_at",
 }
 
-var UpdatedAtModelRole = &dbproxy.StructField{
+var UpdatedAtModelRoleResource = &dbproxy.StructField{
 	StructFieldName: "UpdatedAt",
 	DbFieldName:     "updated_at",
 }
 
-var DeletedAtModelRole = &dbproxy.StructField{
+var DeletedAtModelRoleResource = &dbproxy.StructField{
 	StructFieldName: "DeletedAt",
 	DbFieldName:     "deleted_at",
 }
 
-var CorpIdModelRole = &dbproxy.StructField{
+var CorpIdModelRoleResource = &dbproxy.StructField{
 	StructFieldName: "CorpId",
 	DbFieldName:     "corp_id",
 }
 
-var AppIdModelRole = &dbproxy.StructField{
+var AppIdModelRoleResource = &dbproxy.StructField{
 	StructFieldName: "AppId",
 	DbFieldName:     "app_id",
 }
 
-var AppTypeModelRole = &dbproxy.StructField{
-	StructFieldName: "AppType",
-	DbFieldName:     "app_type",
+var RoleIdModelRoleResource = &dbproxy.StructField{
+	StructFieldName: "RoleId",
+	DbFieldName:     "role_id",
 }
 
-var RoleTypeModelRole = &dbproxy.StructField{
-	StructFieldName: "RoleType",
-	DbFieldName:     "role_type",
+var ResourceTypeModelRoleResource = &dbproxy.StructField{
+	StructFieldName: "ResourceType",
+	DbFieldName:     "resource_type",
 }
 
-var NameModelRole = &dbproxy.StructField{
-	StructFieldName: "Name",
-	DbFieldName:     "name",
+var ResourceIdModelRoleResource = &dbproxy.StructField{
+	StructFieldName: "ResourceId",
+	DbFieldName:     "resource_id",
 }
 
-var ViewOrderModelRole = &dbproxy.StructField{
-	StructFieldName: "ViewOrder",
-	DbFieldName:     "view_order",
-}
-
-var PermissionModelRole = &dbproxy.StructField{
-	StructFieldName: "Permission",
-	DbFieldName:     "permission",
-}
-
-type ModelRoleReflect struct {
+type ModelRoleResourceReflect struct {
 	Id dbproxy.StructFieldWithObj
 	CreatedAt dbproxy.StructFieldWithObj
 	UpdatedAt dbproxy.StructFieldWithObj
 	DeletedAt dbproxy.StructFieldWithObj
 	CorpId dbproxy.StructFieldWithObj
 	AppId dbproxy.StructFieldWithObj
-	AppType dbproxy.StructFieldWithObj
-	RoleType dbproxy.StructFieldWithObj
-	Name dbproxy.StructFieldWithObj
-	ViewOrder dbproxy.StructFieldWithObj
-	Permission dbproxy.StructFieldWithObj
+	RoleId dbproxy.StructFieldWithObj
+	ResourceType dbproxy.StructFieldWithObj
+	ResourceId dbproxy.StructFieldWithObj
 }
 
-func NewModelRoleReflect(i interface{}) *ModelRoleReflect {
+func NewModelRoleResourceReflect(i interface{}) *ModelRoleResourceReflect {
 	obj := reflect.ValueOf(i)
 	if obj.Kind() == reflect.Ptr {
 	    obj = obj.Elem()
 	}
-	r := &ModelRoleReflect{
-		Id: dbproxy.StructFieldWithObj{Field: IdModelRole, Obj: obj},
-		CreatedAt: dbproxy.StructFieldWithObj{Field: CreatedAtModelRole, Obj: obj},
-		UpdatedAt: dbproxy.StructFieldWithObj{Field: UpdatedAtModelRole, Obj: obj},
-		DeletedAt: dbproxy.StructFieldWithObj{Field: DeletedAtModelRole, Obj: obj},
-		CorpId: dbproxy.StructFieldWithObj{Field: CorpIdModelRole, Obj: obj},
-		AppId: dbproxy.StructFieldWithObj{Field: AppIdModelRole, Obj: obj},
-		AppType: dbproxy.StructFieldWithObj{Field: AppTypeModelRole, Obj: obj},
-		RoleType: dbproxy.StructFieldWithObj{Field: RoleTypeModelRole, Obj: obj},
-		Name: dbproxy.StructFieldWithObj{Field: NameModelRole, Obj: obj},
-		ViewOrder: dbproxy.StructFieldWithObj{Field: ViewOrderModelRole, Obj: obj},
-		Permission: dbproxy.StructFieldWithObj{Field: PermissionModelRole, Obj: obj},
+	r := &ModelRoleResourceReflect{
+		Id: dbproxy.StructFieldWithObj{Field: IdModelRoleResource, Obj: obj},
+		CreatedAt: dbproxy.StructFieldWithObj{Field: CreatedAtModelRoleResource, Obj: obj},
+		UpdatedAt: dbproxy.StructFieldWithObj{Field: UpdatedAtModelRoleResource, Obj: obj},
+		DeletedAt: dbproxy.StructFieldWithObj{Field: DeletedAtModelRoleResource, Obj: obj},
+		CorpId: dbproxy.StructFieldWithObj{Field: CorpIdModelRoleResource, Obj: obj},
+		AppId: dbproxy.StructFieldWithObj{Field: AppIdModelRoleResource, Obj: obj},
+		RoleId: dbproxy.StructFieldWithObj{Field: RoleIdModelRoleResource, Obj: obj},
+		ResourceType: dbproxy.StructFieldWithObj{Field: ResourceTypeModelRoleResource, Obj: obj},
+		ResourceId: dbproxy.StructFieldWithObj{Field: ResourceIdModelRoleResource, Obj: obj},
 	}
 
 	return r

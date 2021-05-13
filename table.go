@@ -15,3 +15,7 @@ func (*ModelPermission) TableName() string {
 func (*ModelMenu) TableName() string {
 	return "cmltest_menu"
 }
+
+func (*ModelRoleResource) TableName() string {
+	return "cmltest_role_resource"
+}

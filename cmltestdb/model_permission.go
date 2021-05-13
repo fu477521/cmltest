@@ -132,19 +132,6 @@ var ModelPermission = &dbproxy.ModelObjectType{
 				IsArray:   false,
 			},
 			{
-				FieldName: "detail",
-				Type:      "object",
-				RefType:   "cmltest.ModelPermission.Detail",
-				FormName:  "",
-				FormType:  "",
-				Validate:  "max=1000",
-				DbDef:     "type: text",
-				ScopeCond: "",
-				LinkTo:    "",
-				Editable:  true,
-				IsArray:   false,
-			},
-			{
 				FieldName: "raw",
 				Type:      "string",
 				RefType:   "",
@@ -210,11 +197,6 @@ var OrderViewModelPermission = &dbproxy.StructField{
 	DbFieldName:     "order_view",
 }
 
-var DetailModelPermission = &dbproxy.StructField{
-	StructFieldName: "Detail",
-	DbFieldName:     "detail",
-}
-
 var RawModelPermission = &dbproxy.StructField{
 	StructFieldName: "Raw",
 	DbFieldName:     "raw",
@@ -230,7 +212,6 @@ type ModelPermissionReflect struct {
 	ConstId dbproxy.StructFieldWithObj
 	AppType dbproxy.StructFieldWithObj
 	OrderView dbproxy.StructFieldWithObj
-	Detail dbproxy.StructFieldWithObj
 	Raw dbproxy.StructFieldWithObj
 }
 
@@ -249,7 +230,6 @@ func NewModelPermissionReflect(i interface{}) *ModelPermissionReflect {
 		ConstId: dbproxy.StructFieldWithObj{Field: ConstIdModelPermission, Obj: obj},
 		AppType: dbproxy.StructFieldWithObj{Field: AppTypeModelPermission, Obj: obj},
 		OrderView: dbproxy.StructFieldWithObj{Field: OrderViewModelPermission, Obj: obj},
-		Detail: dbproxy.StructFieldWithObj{Field: DetailModelPermission, Obj: obj},
 		Raw: dbproxy.StructFieldWithObj{Field: RawModelPermission, Obj: obj},
 	}
 
